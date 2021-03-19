@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://localhost/workcontrol</loc>
+<lastmod>2021-03-21T18:13:44+01:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>1.0</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/area-de-concentracao</loc>
+<lastmod>2021-02-08T22:07:42+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/biblioteca</loc>
+<lastmod>2021-02-18T17:29:21+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/comissoes</loc>
+<lastmod>2021-02-11T21:56:22+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/cronograma</loc>
+<lastmod>2021-03-10T13:05:01+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/disciplinas</loc>
+<lastmod>2021-02-18T17:18:22+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/estrutura-curricular</loc>
+<lastmod>2021-02-09T16:55:58+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/historico</loc>
+<lastmod>2021-02-07T18:37:30+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/integracao-com-a-industria</loc>
+<lastmod>2021-02-18T17:19:10+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/laboratorios</loc>
+<lastmod>2021-02-18T17:29:37+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/materiais</loc>
+<lastmod>2021-03-05T20:49:58+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/normas-e-procedimentos</loc>
+<lastmod>2021-02-09T20:43:38+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/processos-seletivos-anteriores</loc>
+<lastmod>2021-03-10T13:12:32+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/quadro-de-horarios</loc>
+<lastmod>2021-02-17T18:30:26+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/secretaria</loc>
+<lastmod>2021-02-18T17:28:53+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/artigos/defesas</loc>
+<lastmod>2021-03-16T21:07:20+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/artigos/itv</loc>
+<lastmod>2021-02-06T18:00:22+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/artigos/proficam</loc>
+<lastmod>2021-02-06T17:58:44+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/artigos/ufop</loc>
+<lastmod>2021-02-06T18:00:39+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/artigo/defesa-hamilton</loc>
+<lastmod>2021-03-15T17:08:00+01:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority >
+</url>
+<url>
+<loc>https://localhost/workcontrol/artigo/inscricoes-abertas-para-pos-em-instrumentacao-controle-e-automacao-de-processos-de-mineracao</loc>
+<lastmod>2021-02-05T14:50:00+01:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority >
+</url>
+</urlset>
