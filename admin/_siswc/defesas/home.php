@@ -3,7 +3,11 @@ $AdminLevel = LEVEL_ITV_INTERVIEW;
 if (!APP_INTERVIEW || empty($DashboardLogin) || empty($Admin) || $Admin['user_level'] < $AdminLevel):
     die('<div style="text-align: center; margin: 5% 0; color: #C54550; font-size: 1.6em; font-weight: 400; background: #fff; float: left; width: 100%; padding: 30px 0;"><b>ACESSO NEGADO:</b> Você não esta logado<br>ou não tem permissão para acessar essa página!</div>');
 endif;
-
+//AUTO DELETE USER TRASH
+if (DB_AUTO_TRASH):
+    $Delete = new Delete;
+    $Delete->ExeDelete(DB_INTERVIEW, "WHERE interview_student = :name", "name=0");
+endif;
 // AUTO INSTANCE OBJECT READ
 if (empty($Read)):
     $Read = new Read;
@@ -50,12 +54,13 @@ endif;
                     <div class='box_content wc_normalize_height'>
                         <img alt='Este é {$students_name}' title='Este é {$students_name}' src='../tim.php?src={$students_thumb}&w=400&h=400'/>
                         <h1>{$students_name}</h1>
-                        
-                        <h5 class='nivel'>Turma de " .getStudentsClass($students_class) ."</h5>
-                        <p class='nivel'>" .($interview_status ? '<span class="font_green">Publicada</span>' : '<span class="font_red">Desativado</span>') . "</p>
+                        <br>
+                        <p class='nivel'>Turma: " .getStudentsClass($students_class) ."</p>
+                        <p class='nivel'>Horário: ".date('d/m/Y H:i', strtotime($interview_date))."</p>
+                        <p class='nivel'>" .($interview_status ? '<span class="font_green">Publicada no Site</span>' : '<span class="font_red">Desativado</span>') . "</p>
                     </div>
                     <div class='single_user_actions'>
-                        <a class='btn btn_green icon-bubble2' href='dashboard.php?wc=defesas/create&id={$interview_id}' title='Gerenciar Defesa!'>Editar Defesa</a>
+                        <a class='btn btn_green icon-checkbox-checked' href='dashboard.php?wc=defesas/create&id={$interview_id}' title='Gerenciar Defesa!'>Editar Defesa</a>
                     </div>
                 </article>";
         endforeach;

@@ -794,8 +794,9 @@ $(function () {
     //DELETE CONFIRM
     $('html, body').on('click', '.j_delete_action', function (e) {
         var RelTo = $(this).attr('rel');
+
         $(this).fadeOut(10, function () {
-            $('.' + RelTo + '[id="' + $(this).attr('id') + '"] .j_delete_action_confirm:eq(0)').fadeIn(10);
+            $('.' + RelTo + '[id="' + $(this).attr('id') + '"] .j_delete_action_confirm:eq(0)').fadeIn(1);
         });
 
         e.preventDefault();

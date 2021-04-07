@@ -46,12 +46,21 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
     //SELECIONA AÇÃO
     switch ($Case):
         case 'manager':
-            $InterviewlId = $PostData['interview_id'];
+            $InterviewId = $PostData['interview_id'];
             $InterviewStudent = $PostData['interview_student'];
             //unset($PostData['interview_id'],$PostData['interview_student'] );
             $Read->ExeRead(DB_STUDENTS, "WHERE students_name = :name", "name={$InterviewStudent}");
             extract($Read->getResult()[0]);
-            $PostData['interview_student'] = $interview_id;
+            $PostData['interview_student'] = $students_id;
+            $PostData['interview_date'] = (!empty($PostData['interview_date']) ? Check::Data($PostData['interview_date']) : date('Y-m-d H:i:s'));
+            $PostData['interview_publish'] = (!empty($PostData['interview_publish']) ? Check::Data($PostData['interview_publish']) : date('Y-m-d H:i:s'));
+            $PostData['interview_link'] = (!empty($PostData['interview_link']) ? Check::Name($PostData['interview_link']) : Check::Name($PostData['interview_title']));
+            $Read->ExeRead(DB_INTERVIEW, "WHERE interview_id != :id AND interview_link = :link", "id={$InterviewId}&link={$PostData['interview_link']}");
+            if ($Read->getResult()):
+                $PostData['interview_link'] = "{$PostData['interview_link']}-{$InterviewId}";
+            endif;
+            $jSON['name'] = $PostData['interview_link'];
+
 
             $Read->ExeRead( DB_INTERVIEW ,  "WHERE interview_student = :student AND interview_id != :id", "student={$students_id}&id={$InterviewId}");
             if ($Read->getResult()):

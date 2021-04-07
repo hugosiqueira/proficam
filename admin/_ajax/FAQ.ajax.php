@@ -74,7 +74,40 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
             endif;
             break;
 
-    endswitch;
+
+        case 'category_add':
+            $PostData = array_map('strip_tags', $PostData);
+            $CatId = $PostData['faq_category_id'];
+            $FaqCategory = $PostData['faq_category_name'];
+            unset($PostData['faq_category_id']);
+
+
+            $Read->ExeRead( DB_FAQ_CATEGORY,  "WHERE faq_category_id != :id  AND faq_category_name = :category", "id={$CatId}&category={$FaqCategory}");
+            if ($Read->getResult()):
+                $jSON['trigger'] = AjaxErro("<b class='icon-warning'>OPSS:</b> Olá {$_SESSION['userLogin']['user_name']}. Essa categoria já está cadastrada!", E_USER_WARNING);
+            else:
+
+                //ATUALIZA Categoria
+                $Update->ExeUpdate(DB_FAQ_CATEGORY, $PostData, "WHERE faq_category_id = :id", "id={$CatId}");
+                $jSON['trigger'] = AjaxErro("TUDO CERTO {$_SESSION['userLogin']['user_name']}, A categoria foi atualizada com sucesso!");
+
+            endif;
+            break;
+            break;
+
+        case 'category_remove':
+            $FaqId = $PostData['del_id'];
+            $Read->ExeRead(DB_FAQ_CATEGORY, "WHERE faq_category_id = :id", "id=".$FaqId);
+            if (!$Read->getResult()):
+                $jSON['trigger'] = AjaxErro("<b class='icon-warning'>CATEGORIA NÃO EXISTE:</b> Olá {$_SESSION['userLogin']['user_name']}, você tentou deletar uma categoria que não existe ou já foi removida!", E_USER_WARNING);
+            else:
+                //extract($Read->getResult()[0]);
+                $Delete->ExeDelete(DB_FAQ_CATEGORY, "WHERE faq_category_id = :id", "id=".$FaqId);
+                $jSON['trigger'] = AjaxErro("<b class='icon-checkmark'>CATEGORIA REMOVIDA COM SUCESSO!</b>");
+                $jSON['redirect'] = "dashboard.php?wc=faq/categories";
+            endif;
+            break;
+            endswitch;
 
     //RETORNA O CALLBACK
     if ($jSON):

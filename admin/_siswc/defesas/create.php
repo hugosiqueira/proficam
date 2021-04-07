@@ -38,7 +38,7 @@ else:
     $CreateInterviewDefault = [
         "interview_student" => 1,
         "interview_date" => '2021-01-01',
-        "interview_publish" => 1,
+        "interview_publish" => '2021-01-01',
         "interview_status" => 0
 
     ];
@@ -89,7 +89,7 @@ endif;
                     <input type="hidden" name="interview_id" value="<?= $InterviewId; ?>"/>
 
                         <label class="label">
-                            <span class="legend">Aluno:</span>
+                            <span class="legend">Aluno(a):</span>
                             <select name="interview_student" id="editable-select" required>
                                 <?php
                                 $Read->ExeRead(DB_STUDENTS, "ORDER BY students_name ASC");
@@ -102,17 +102,55 @@ endif;
                             </select>
                         </label>
                     <label class="label">
-                        <span class="legend">Publicar:</span>
-                        <select name="interview_status" required>
-                            <option selected disabled value="">Selecione:</option>
-                            <option value="1" <?= ($interview_status == 1 ? "selected" : "")?>>Sim</option>
-                            <option value="0" <?= ($interview_status == 0 ? "selected" : "")?>>Não</option>
-                        </select>
+                        <span class="legend">Título da Defesa:</span>
+                        <input type="text"  name="interview_title" value="<?= $interview_title;?>" required/>
+                    </label>
+                    <div class="label_50">
+                        <label class="label">
+                            <span class="legend">Tipo de Defesa:</span>
+                            <select name="interview_type"  required>
+                                <?php
+                                $Read->ExeRead(DB_INTERVIEW_TYPE, "ORDER BY interview_type_name ASC");
+                                foreach ($Read->getResult() as $Type):
+                                    extract($Type);
+
+                                    ?>
+                                    <option value="<?=$interview_type_id;?>" <?=($interview_type_id == $interview_type ? "selected" : "")?>><?=$interview_type_name;?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </label>
+
+                        <label class="label">
+                            <span class="legend">Dia da Defesa:</span>
+                            <input type="text" class="jwc_datepicker" data-timepicker="true" readonly="readonly" name="interview_date" value="<?= $interview_date ? date('d/m/Y H:i', strtotime($interview_date)) : date('d/m/Y H:i'); ?>" required/>
+                        </label>
+                        <label class="label">
+                            <span class="legend">Local da Defesa:</span>
+                            <input type="text"  name="interview_local" value="<?= $interview_local;?>" />
+                        </label>
+                        <label class="label">
+                            <span class="legend">Link da Defesa no TEAMS:</span>
+                            <input type="text"  name="interview_url" value="<?= $interview_url;?>" />
+                        </label>
+
+                        <label class="label">
+                            <span class="legend">Publicar:</span>
+                            <select name="interview_status" required>
+                                <option selected disabled value="">Selecione:</option>
+                                <option value="1" <?= ($interview_status == 1 ? "selected" : "")?>>Sim</option>
+                                <option value="0" <?= ($interview_status == 0 ? "selected" : "")?>>Não</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <label class="label">
+                        <span class="legend">Orientadores e Banca Examinadora:</span>
+                        <textarea name="interview_details" class="work_mce_basic" rows="3" ><?=($interview_details) ? $interview_details : "Orientador: <br>Banca: <br>";?></textarea>
                     </label>
 
                     <label class="label">
-                        <span class="legend">Detalhes da Defesa:</span>
-                        <textarea name="inteview_details" rows="4" placeholder="Orientador: \n Banca \n " ><?=$interview_details;?></textarea>
+                        <span class="legend">Resumo / Abstract:</span>
+                        <textarea name="interview_resume" class="work_mce_basic" rows="8" ><?=$interview_resume;?></textarea>
                     </label>
 
 

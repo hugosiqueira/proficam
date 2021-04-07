@@ -100,7 +100,7 @@ $(function () {
 });
 
 //FUNCTION TINYMCE
-function wc_tinyMCE() {
+/*function wc_tinyMCE() {
     tinyMCE.init({
         selector: "textarea.work_mce",
         language: 'pt_BR',
@@ -153,6 +153,64 @@ function wc_tinyMCE() {
         relative_urls: false,
         remove_script_host: false,
         paste_as_text: true
+    });
+}*/
+
+//FUNCTION TINYMCE
+function wc_tinyMCE() {
+    tinyMCE.init({
+        selector: "textarea.work_mce",
+        language: 'pt_BR',
+        menubar: false,
+        theme: "modern",
+        height: 200,
+        skin: 'light',
+        entity_encoding: "raw",
+        theme_advanced_resizing: true,
+        plugins: [
+            "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+            "save table contextmenu directionality emoticons template paste textcolor media responsivefilemanager"
+        ],
+        toolbar: "styleselect | forecolor | backcolor | pastetext | removeformat |  bold | italic | underline | strikethrough | bullist | numlist | alignleft | aligncenter | alignright |  link | unlink | upinsideimage | media | responsivefilemanager |  outdent | indent | fullscreen | preview | code",
+        content_css: "_css/tinyMCE.css?wc=true",
+        style_formats: [
+            {title: 'Normal', block: 'p'},
+            {title: 'Titulo 3', block: 'h3'},
+            {title: 'Titulo 4', block: 'h4'},
+            {title: 'Titulo 5', block: 'h5'},
+            {title: 'Codigo', block: 'pre', classes: 'brush: php;'}
+        ],
+        link_class_list: [
+            {title: 'None', value: ''},
+            {title: 'Call To Action', value: 'calltoaction'}
+        ],
+        setup: function (editor) {
+            editor.addButton('upinsideimage', {
+                title: 'Enviar Imagem',
+                icon: 'image',
+                onclick: function () {
+                    $('.workcontrol_imageupload').fadeIn('fast');
+                }
+            });
+        },
+        link_title: false,
+        target_list: false,
+        theme_advanced_blockformats: "h1,h2,h3,h4,h5,p,pre",
+        media_dimensions: false,
+        media_poster: false,
+        media_alt_source: false,
+        media_embed: false,
+        extended_valid_elements: "a[href|target=_blank|rel|class]",
+        imagemanager_insert_template: '<img src="{$url}" title="{$title}" alt="{$title}" />',
+        image_dimensions: false,
+        relative_urls: false,
+        remove_script_host: false,
+        paste_as_text: true,
+
+        external_filemanager_path: "https://proficam.agenciabee.com/admin/_js/filemanager/",
+        filemanager_title: "Gerenciador de Midia",
+        external_plugins: {"filemanager": "https://proficam.agenciabee.com/admin/_js/filemanager/plugin.min.js"}
     });
 }
 

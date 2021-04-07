@@ -29,20 +29,21 @@ endif;
 <section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
-
-            <?php
-            $Page = (!empty($URL[2]) ? $URL[2] : 1);
-            $Pager = new Pager(BASE . "/artigos/{$category_name}/", "<<", ">>", 5);
-            $Pager->ExePager($Page, 5);
-            $Read->ExeRead(DB_POSTS, "WHERE post_status = :status AND post_date <= :date AND (post_category = :ct OR FIND_IN_SET(:ct, post_category_parent)) ORDER BY post_date DESC LIMIT :limit OFFSET :offset", "status=1&date=".date('Y-m-d H:i:s')."&limit={$Pager->getLimit()}&offset={$Pager->getOffset()}&ct={$category_id}");
-            if (!$Read->getResult()):
-                $Pager->ReturnPage();
-                echo Erro("Ainda não existe posts cadastrados. Por favor, volte mais tarde :)", E_USER_NOTICE);
-            else:
-                foreach ($Read->getResult() as $Post):
-                    extract($Post);
-                    ?>
-                    <div class="col-md-6 col-lg-4 ftco-animate">
+            <div class="col-lg-8 ftco-animate">
+                <div class="row">
+        <?php
+        $Page = (!empty($URL[2]) ? $URL[2] : 1);
+        $Pager = new Pager(BASE . "/artigos/{$category_name}/", "<<", ">>", 5);
+        $Pager->ExePager($Page, 5);
+        $Read->ExeRead(DB_POSTS, "WHERE post_status = :status AND post_date <= :date AND (post_category = :ct OR FIND_IN_SET(:ct, post_category_parent)) ORDER BY post_date DESC LIMIT :limit OFFSET :offset", "status=1&date=".date('Y-m-d H:i:s')."&limit={$Pager->getLimit()}&offset={$Pager->getOffset()}&ct={$category_id}");
+        if (!$Read->getResult()):
+            $Pager->ReturnPage();
+            echo Erro("Ainda não existe posts cadastrados. Por favor, volte mais tarde :)", E_USER_NOTICE);
+        else:
+            foreach ($Read->getResult() as $Post):
+                extract($Post);
+            ?>
+                <div class="col-md-12 col-lg-12 ftco-animate">
                 <div class="blog-entry">
 
                        <?php if(!empty($post_cover)): ?>
@@ -85,8 +86,11 @@ endif;
             echo $Pager->getPaginator();
             ?>
         </div>
+        </div>
 
        <!-- insira se necessário a sidebar aqui -->
+        <?php require REQUIRE_PATH . '/inc/sidebar.php'; ?>
+
         <div class="clear"></div>
     </div>
 </div>

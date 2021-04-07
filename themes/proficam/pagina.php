@@ -27,10 +27,73 @@ endif;
         <div class="container">
 			<div class="row">
                 <div class="col-lg-8 ftco-animate">
-                    <h2 class="mb-3"><?= $page_title; ?></h2>
+                    <h2 class="mb-2"><?= $page_title; ?></h2>
+
                     <div class="htmlchars text-justify">
+                        <?php if($page_audio): ?>
+                            <div id="audimaWidget"></div>
+                            <script src="//audio.audima.co/audima-widget.js"></script>
+                            <style>
+                                #audimaWidget{
+                                    height: 70px !important;
+                                }
+                                div[id ~="audima-banner"] {
+                                    display:none !important;
+                                }
+                            </style>
+                        <?php endif; ?>
+                        <?php
+                        if($page_gallery && ($page_gallery_position == 'top')):
+                            ?>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+                            <div class="lightbox-gallery">
+                                <div class="container">
+                                    <div class="intro">
+                                        <h4 class="text-center"></h4>
+                                    </div>
+                                    <div class="row photos">
+                                        <?php
+                                        $Read->FullRead("SELECT * FROM ".DB_GALLERY." p LEFT JOIN " .DB_GALLERY_IMAGES. " s ON p.gallery_id = s.gallery_id WHERE p.gallery_id = :id", "id={$page_gallery}");
+                                        foreach($Read->getResult() as $Images):
+                                            extract($Images);
+                                            ?>
+                                            <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="<?= BASE . "/uploads/" . $gallery_image_file;?>" data-lightbox="photos"><img class="img-fluid" src="<?= BASE . "/tim.php?src=uploads/" . $gallery_image_file."&w=200&h=200";?>"></a></div>
+                                        <?php endforeach;?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        endif;
+                        ?>
+
                         <?= $page_content; ?>
                     </div>
+                    <?php
+                    if($page_gallery && ($page_gallery_position == 'bottom')):
+                        ?>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+                        <div class="lightbox-gallery">
+                            <div class="container">
+                                <div class="intro">
+                                    <h4 class="text-center"></h4>
+                                </div>
+                                <div class="row photos">
+                                    <?php
+                                    $Read->FullRead("SELECT * FROM ".DB_GALLERY." p LEFT JOIN " .DB_GALLERY_IMAGES. " s ON p.gallery_id = s.gallery_id WHERE p.gallery_id = :id", "id={$page_gallery}");
+                                    foreach($Read->getResult() as $Images):
+                                        extract($Images);
+                                        ?>
+                                        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="<?= BASE . "/uploads/" . $gallery_image_file;?>" data-lightbox="photos"><img class="img-fluid" src="<?= BASE . "/tim.php?src=uploads/" . $gallery_image_file."&w=200&h=200";?>"></a></div>
+                                    <?php endforeach;?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    endif;
+                    ?>
+
 
                     <div class="clear"></div>
                 </div>

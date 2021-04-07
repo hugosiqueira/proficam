@@ -13,6 +13,7 @@
        url("../fonts/flaticon/font/Flaticon.svg#Flaticon") format("svg");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -44,3 +45,5 @@
 .flaticon-education:before { content: "\f105"; }
 .flaticon-jigsaw:before { content: "\f106"; }
 .flaticon-kids:before { content: "\f107"; }
+    .flaticon-foguete:before { content:"\f162";}
+    .flaticon-industrial-robot:before { content: "\f11a"; }

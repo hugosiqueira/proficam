@@ -27,7 +27,7 @@ if (!$WorkControlDefineConf):
     /*
      * ADMIN CONFIG
      */
-    define('ADMIN_NAME', 'Proficam');  //Nome do painel de controle (Work Control)
+    define('ADMIN_NAME', 'PROFICAM');  //Nome do painel de controle (Work Control)
     define('ADMIN_DESC', 'Painel administrativo do site da PROFICAM'); //Descrição do painel de controle
     define('ADMIN_MODE', 1); //1 = website / 2 = e-commerce / 3 = Imobi / 4 = EAD
     define('ADMIN_WC_CUSTOM', 1); //Habilita menu e telas customizadas
@@ -38,7 +38,7 @@ if (!$WorkControlDefineConf):
      * E-MAIL SERVER
      * Consulte estes dados com o serviço de hospedagem
      */
-    define('MAIL_HOST', 'mail.zoho.com'); //Servidor de e-mail
+    define('MAIL_HOST', 'smtp.zoho.com'); //Servidor de e-mail
     define('MAIL_PORT', '587'); //Porta de envio
     define('MAIL_USER', 'hugo@agenciabee.com'); //E-mail de envio
     define('MAIL_SMTP', 'hugo@agenciabee.com'); //E-mail autenticador do envio (Geralmente igual ao MAIL_USER, exceto em serviços como AmazonSES, sendgrid...)
@@ -83,8 +83,8 @@ if (!$WorkControlDefineConf):
     define('APP_TEACHERS', 1); //Professores
     define('APP_COURSE', 1); //Curso
     define('APP_GALLERY', 1); //Perguntas Frequentes
-    define('APP_RESEARCH', 1);
-    define('APP_INTERVIEW', 1);
+    define('APP_RESEARCH', 1); // Linhas de Pesquisa
+    define('APP_INTERVIEW', 1); // Defesas
 
 
     /*
@@ -116,6 +116,7 @@ if (!$WorkControlDefineConf):
     define('LEVEL_ITV_GALLERY', 6);
     define('LEVEL_ITV_FAQ', 6);
     define('LEVEL_ITV_INTERVIEW', 6);
+    define('LEVEL_ITV_RESEARCH', 6);
 
 
     /*
@@ -155,7 +156,7 @@ if (!$WorkControlDefineConf):
      * COMMENT CONFIG
      */
     define('COMMENT_MODERATE', 1); //Todos os NOVOS comentários ficam ocultos até serem aprovados
-    define('COMMENT_ON_POSTS', 1); //Aplica comentários aos posts
+    define('COMMENT_ON_POSTS', 0); //Aplica comentários aos posts
     define('COMMENT_ON_PAGES', 0); //Aplica comentários as páginas
     define('COMMENT_ON_PRODUCTS', 1); //Aplica comentários aos produtos
     define('COMMENT_SEND_EMAIL', 1); //Envia e-mails transicionais para usuários sobre comentários

@@ -21,7 +21,7 @@ if ($GalleryId):
         $FormData = array_map('htmlspecialchars', $Read->getResult()[0]);
         extract($FormData);
     else:
-        $_SESSION['trigger_controll'] = Erro("<b>OPSSS {$Admin['user_name']}</b>, Você Tentou Editar Uma Página Que Não Existe Ou Que Foi Removida Recentemente!", E_USER_NOTICE);
+        $_SESSION['trigger_controll'] = Erro("<b>OPSSS {$Admin['user_name']}</b>, Você Tentou Editar Uma Galeria Que Não Existe Ou Que Foi Removida Recentemente!", E_USER_NOTICE);
         header('Location: dashboard.php?wc=gallery/home');
         exit;
     endif;
@@ -32,7 +32,7 @@ else:
     exit;
 endif;
 ?>
-
+<link  rel="stylesheet"  href="<?= BASE; ?>/admin/_siswc/gallery/gallery.css" >
 <header class="dashboard_header"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <div class="dashboard_header_title">
         <h1 class="icon-images"><?= $gallery_name ? $gallery_name : 'Nova Galeria'; ?></h1>
@@ -57,7 +57,7 @@ endif;
 
         <div class="box box100">
 
-            <div class="panel_header darkblue">
+            <div class="panel_header">
                 <h2 class="icon-images">Dados Sobre a Galeria</h2>
             </div>
 
@@ -70,7 +70,7 @@ endif;
 
                     <label class="label">
                         <span class="legend">Descrição:</span>
-			            <textarea class="work_mce" rows="50" name="gallery_description" placeholder="Sobre a Galeria:" required><?= $gallery_description; ?></textarea>
+			            <textarea rows="5" name="gallery_description" placeholder="Sobre a Galeria:"><?= $gallery_description; ?></textarea>
                     </label>
 
                 </div>    
@@ -86,12 +86,9 @@ endif;
                     </label>
 
                     <div class="wc_actions" style="text-align: center; margin-top: 20px;">
-                        <button title="ATUALIZAR" name="public" value="1" class="btn_big btn_darkblue icon-share">ATUALIZAR <img class="form_load none" style="margin-left: 6px; margin-bottom: 9px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="_img/load.svg"/></button>
-                        
-                        <div class="switch__container" style="margin-bottom: 10px;">
-                          <input value='1' id="switch-shadow" class="switch switch--shadow" type="checkbox" name='gallery_status' <?= ($gallery_status == 1 ? 'checked' : ''); ?>>
-                          <label for="switch-shadow"></label>
-                        </div>
+                        <label class="label_check label_publish <?= ($gallery_status == 1 ? 'active' : ''); ?>"><input style="margin-top: -1px;" type="checkbox" value="1" name="gallery_status" <?= ($gallery_status == 1 ? 'checked' : ''); ?>> Publicar Agora!</label>
+                        <button name="public" value="1" class="btn btn_green icon-share">ATUALIZAR</button>
+                        <img class="form_load none" style="margin-left: 10px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="_img/load.gif"/>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -99,10 +96,9 @@ endif;
         </div>
     </form>
  
-    <div class="box box100">
-        <div class="panel_header darkblue">
+    <div class="box box100 post_single">
+        <div class="panel_header">
             <h2 class="icon-images" style="display:inline-block">Fotos da Galeria</h2>
-            <span class="btn_header btn_blue icon-spinner9 wc_drag_active" title="Ordenar" style="display:inline-block; margin-bottom: 10px;">Ordenar</span>
         </div>
         
         <div class="panel">
@@ -115,7 +111,7 @@ endif;
                                  
                 <input type="file" name="gallery_images[]" multiple required/>                
                 <div class="wc_actions" style="text-align: center; margin-top: 15px;">
-                    <button title="ATUALIZAR" name="public" value="1" class="btn_big btn_darkblue icon-share">ATUALIZAR <img class="form_load none" style="margin-left: 6px; margin-bottom: 9px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="_img/load.svg"/></button>
+                    <button title="ATUALIZAR" name="public" value="1" class="btn btn_green icon-share">ATUALIZAR <img class="form_load none" style="margin-left: 6px; margin-bottom: 9px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="_img/load.svg"/></button>
                 </div>
                 <div class="clear"></div>
                 
@@ -128,12 +124,14 @@ endif;
                             foreach ($Read->getResult() as $image):
                                 extract($image);
                                 ?>                            
-                                <div class='panel_gallery_image wc_draganddrop js-rel-to' callback='Gallery' callback_action='gallery_image_order' id='<?= $gallery_image_id; ?>' data-id="<?= $gallery_image_id; ?>" >
-                                    <img src='../tim.php?src=uploads/<?= $gallery_file; ?>&w=200&h=200'>
+                                <div class='gallery_single panel_gallery_image wc_draganddrop js-rel-to' callback='Gallery' callback_action='gallery_image_order' id='<?= $gallery_image_id; ?>' data-id="<?= $gallery_image_id; ?>" >
+                                    <img src='../tim.php?src=uploads/<?= $gallery_image_file; ?>&w=200&h=200'>
                                     <div class='panel_gallery_action'>
-                                        <ul class="buttons"> 
-                                        <li><span title="Editar Imagem" class='j_edit_action icon-pencil icon-notext btn_header btn_darkblue'></span></li>
-                                        <li><span title="Excluir Imagem" rel='panel_gallery_image' class='j_delete_action icon-bin icon-notext btn_header btn_red' callback='Gallery' callback_action='gallery_image_delete' id="<?= $gallery_image_id; ?>"></span></li>
+                                        <ul class="buttons">
+                                        <li><span title="Editar Imagem" class='j_edit_action icon-pencil icon-notext btn btn_header btn_green'> Legenda</span></li>
+
+                                            <li><span rel='gallery_single' callback='Gallery' callback_action='gallery_image_delete' class='j_delete_action icon-cancel-circle btn btn_red' id='<?= $gallery_image_id; ?>'> Deletar</span></li>
+                                            <li><span rel='gallery_single' callback='Gallery' callback_action='gallery_image_delete' class='j_delete_action_confirm icon-warning btn btn_yellow' style='display: none' id='<?= $gallery_image_id; ?>'>Deletar Imagem?</span></li>
                                         </ul>
                                     </div>
                                     <span class="panel_gallery_image_legend al_center"><?= Check::Words($gallery_image_legend, 80) ?></span>
@@ -157,7 +155,7 @@ endif;
                         <span class="legend">Alterar Legenda da Foto:</span>
                         <input type="text" name="gallery_image_legend" placeholder="Legenda:" required/>
                         <span title="Fechar" class="modal_cancel icon-bin btn btn_red" id="post_control" style="margin-right: 8px;">Fechar</span>
-                        <button title="ATUALIZAR" class="btn btn_darkblue icon-share">ATUALIZAR</button>
+                        <button title="ATUALIZAR" class="btn btn_green icon-share">ATUALIZAR</button>
                         <div class="clear"></div>
                     </form>  
                 </div>    

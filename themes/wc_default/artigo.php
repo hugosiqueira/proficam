@@ -77,7 +77,7 @@ endif;
             </div>
         </div>
 
-        <?php require REQUIRE_PATH . '/inc/sidebar_post.php'; ?>
+        <?php require REQUIRE_PATH . '/inc/sidebar.php'; ?>
         <div class="clear"></div>
     </div>
 </div>

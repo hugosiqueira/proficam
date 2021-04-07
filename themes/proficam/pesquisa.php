@@ -16,9 +16,21 @@ if (empty($_SESSION['search']) || !in_array($Search, $_SESSION['search'])):
     $_SESSION['search'][] = $Search;
 endif;
 ?>
-<div class="container main_content">
-    <div class="content">
-        <div class="main_blog">
+<section class="hero-wrap hero-wrap-2" style="background-image: url('<?= BASE; ?>/_cdn/images/bg_1.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-2 bread">Pesquisa</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="<?= BASE; ?>">Início <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="<?= BASE; ?>/artigos">Notícias <i class="ion-ios-arrow-forward"></i></a></span> </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 ftco-animate">
             <?php
             $Page = (!empty($URL[2]) ? $URL[2] : 1);
             $Pager = new Pager(BASE . "/pesquisa/{$SearchPage}/", "<<", ">>", 5);
@@ -53,3 +65,4 @@ endif;
         <div class="clear"></div>
     </div>
 </div>
+</section>

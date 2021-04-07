@@ -9,7 +9,9 @@
         </div>
     </div>
 </section>
-
+<div class="page-content">
+    <div class="container">
+        <div class="cover shadow-lg bg-white">
 <section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
@@ -85,6 +87,9 @@
         </div>
     </div>
 </section>
+</div>
+</div>
+</div>
 
 
 

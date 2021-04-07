@@ -21,7 +21,7 @@ echo "<li class='workcontrol_socialshare_item workcontrol_socialshare_facebook'>
  * GOOGLE +
  */
 $ShareIconText = 'Compartilhar no Google Plus';
-echo "<li class='workcontrol_socialshare_item workcontrol_socialshare_googleplus'><a rel='{$WcShareLink}' target='_blank' title='{$ShareIconText}' href='https://plus.google.com/share?url={$WcShareLink}'><img alt='{$ShareIconText}' title='{$ShareIconText}' src='" . BASE . "/_cdn/widgets/share/icons/googleplus.png'/><span class='wc_gp_count'>00</span></a></li>";
+//echo "<li class='workcontrol_socialshare_item workcontrol_socialshare_googleplus'><a rel='{$WcShareLink}' target='_blank' title='{$ShareIconText}' href='https://plus.google.com/share?url={$WcShareLink}'><img alt='{$ShareIconText}' title='{$ShareIconText}' src='" . BASE . "/_cdn/widgets/share/icons/googleplus.png'/><span class='wc_gp_count'>00</span></a></li>";
 /*
  * TWITTER
  */

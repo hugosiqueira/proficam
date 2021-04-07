@@ -5,12 +5,12 @@ require '../../_app/Config.inc.php';
 $NivelAcess = LEVEL_ITV_GALLERY;
 
 if (empty($_SESSION['userLogin']) || empty($_SESSION['userLogin']['user_level']) || $_SESSION['userLogin']['user_level'] < $NivelAcess):
-    $jSON['alert'] = ["red", "wondering2", "OPSSS", "Você Não Tem Permissão Para Essa Ação ou Não Está Logado Como Administrador!"];
+    $jSON['trigger'] = AjaxErro('<b class="icon-warning">OPSS:</b> Você não tem permissão para essa ação ou não está logado como administrador!', E_USER_ERROR);
     echo json_encode($jSON);
     die;
 endif;
 
-usleep(50000);
+usleep(10000);
 
 //DEFINE O CALLBACK E RECUPERA O POST
 $jSON = null;
@@ -72,8 +72,13 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
             
             $Delete->ExeDelete(DB_GALLERY_IMAGES, "WHERE gallery_id = :id", "id={$PostData['del_id']}");
             $Delete->ExeDelete(DB_GALLERY, "WHERE gallery_id = :id", "id={$PostData['del_id']}");
+            $Update->ExeUpdate(DB_PAGES, array("page_gallery"=>0), "WHERE page_gallery = :id", "id={$PostData['del_id']}");
+            $Update->ExeUpdate(DB_POSTS, array("post_gallery"=>0), "WHERE post_gallery = :id", "id={$PostData['del_id']}");
 
-            $jSON['alert'] = ["green", "checkmark", "TUDO CERTO {$_SESSION['userLogin']['user_name']}", "A Galeria Foi Excluída Com Sucesso!"];
+
+
+            //$jSON['trigger'] = AjaxErro( "TUDO CERTO {$_SESSION['userLogin']['user_name']}, A Galeria Foi Excluída Com Sucesso!");
+            $jSON['success'] = true;
             break;
 
         //EDITAR GALERIA
@@ -86,10 +91,10 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
             $Read->ExeRead(DB_GALLERY, "WHERE gallery_id= :id", "id={$GalleryId}");
             $ThisGallery = $Read->getResult()[0];
 			
-			$PostData['gallery_name'] = (!empty($PostData['gallery_name']) ? Check::Name($PostData['gallery_name']) : Check::Name($PostData['gallery_name']));
-            $Read->ExeRead(DB_GALLERY, "WHERE gallery_id != :id AND gallery_name = :name", "id={$GalleryId}&name={$PostData['gallery_name']}");
+			$PostData['gallery_link'] = (!empty($PostData['gallery_name']) ? Check::Name($PostData['gallery_name']) : Check::Name($PostData['gallery_name']));
+            $Read->ExeRead(DB_GALLERY, "WHERE gallery_id != :id AND gallery_link = :name", "id={$GalleryId}&name={$PostData['gallery_link']}");
             if ($Read->getResult()):
-                $PostData['gallery_name'] = "{$PostData['gallery_name']}-{$GalleryId}";
+                $PostData['gallery_link'] = "{$PostData['gallery_link']}-{$GalleryId}";
             endif;
             $jSON['name'] = $PostData['gallery_name'];
             
@@ -101,11 +106,11 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
                 endif;
 
                 $Upload = new Upload('../../uploads/');
-                $Upload->Image($File, Check::Name($PostData['gallery_name']) . '-' . time(), IMAGE_W, 'gallery');
+                $Upload->Image($File, Check::Name($PostData['gallery_name']) . '-' . time(), 1200, 'gallery');
                 if ($Upload->getResult()):
                     $PostData['gallery_cover'] = $Upload->getResult();
                 else:
-                    $jSON['alert'] = ["yellow", "image", "ERRO AO ENVIAR IMAGEM", "Desculpe {$_SESSION['userLogin']['user_name']}, Selecione Uma Imagem JPG Ou PNG Para Inserir Na Galeria!"];
+                    $jSON['trigger'] = AjaxErro( "Desculpe {$_SESSION['userLogin']['user_name']}, Selecione Uma Imagem JPG Ou PNG Para Inserir Na Galeria!");
                     echo json_encode($jSON);
                     return;
                 endif;
@@ -114,13 +119,13 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
             endif;
 
             
-            $Read->FullRead("SELECT gallery_name FROM " . DB_GALLERY . " WHERE gallery_name = :nm AND gallery_id != :id", "nm={$PostData['gallery_name']}&id={$GalleryId}");
+            $Read->FullRead("SELECT gallery_link FROM " . DB_GALLERY . " WHERE gallery_link = :nm AND gallery_id != :id", "nm={$PostData['gallery_link']}&id={$GalleryId}");
             if ($Read->getResult()):
-                $PostData['gallery_name'] = "{$PostData['gallery_name']}-{$GalleryId}";
+                $PostData['gallery_link'] = "{$PostData['gallery_link']}-{$GalleryId}";
             endif;
 
             $Update->ExeUpdate(DB_GALLERY, $PostData, "WHERE gallery_id = :id", "id={$GalleryId}");
-            $jSON['alert'] = ["green", "checkmark", "TUDO CERTO", "Galeria Atualizada Com Sucesso!"];
+            $jSON['trigger'] = AjaxErro( "TUDO CERTO, Galeria Atualizada Com Sucesso!");
             break;
                     
         case 'gallery_order':
@@ -131,7 +136,7 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
                 endforeach;
 
                 $jSON['sucess'] = true;
-                $jSON['alert'] = ["green", "checkmark", "TUDO CERTO", "Galeria Ordenada Com Sucesso!"];
+                $jSON['trigger'] = AjaxErro( "TUDO CERTO, Galeria Ordenada Com Sucesso!");
             endif;
             break;
             
@@ -144,7 +149,7 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
             //VERIFICA SE A GALERIA EXISTE
             $Read->FullRead("SELECT gallery_name FROM " . DB_GALLERY . " WHERE gallery_id = :id", "id={$GalleryId}");
             if (!$Read->getResult()):
-                $jSON['alert'] = ["yellow", "image", "ERRO AO ENVIAR IMAGEM", "Desculpe {$_SESSION['userLogin']['user_name']}, Mas Não Foi Possível Identificar a Galeria Vinculada!"];
+                $jSON['trigger'] = AjaxErro("ERRO AO ENVIAR IMAGEM, Desculpe {$_SESSION['userLogin']['user_name']}, Mas Não Foi Possível Identificar a Galeria Vinculada!");
             else:
                 $GalleryTitle = $Read->getResult()[0]['gallery_name'];
                 //SE EXISTIR, ADICIONA AS FOTOS
@@ -179,9 +184,9 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
                 
                 if ($u >= 1):
                     $jSON['divremove'] = ".js-trigger";
-                    $jSON['alert'] = ["green", "checkmark", "TUDO CERTO", "Fotos Enviadas Com Sucesso!"];
+                    $jSON['trigger'] = AjaxErro( "TUDO CERTO, Fotos Enviadas Com Sucesso!");
                 else:
-                    $jSON['alert'] = ["yellow", "image", "ERRO AO ENVIAR IMAGEM", "Desculpe {$_SESSION['userLogin']['user_name']}, Selecione Uma Imagem JPG Ou PNG Para Inserir Na Galeria!"];
+                    $jSON['trigger'] = AjaxErro( "ERRO AO ENVIAR IMAGEM, Desculpe {$_SESSION['userLogin']['user_name']}, Selecione Uma Imagem JPG Ou PNG Para Inserir Na Galeria!");
                 endif;
             endif;
             
@@ -229,8 +234,8 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
             endif;
             
             $Delete->ExeDelete(DB_GALLERY_IMAGES, "WHERE gallery_image_id = :id", "id={$PostData['del_id']}");
-
-            $jSON['alert'] = ["green", "checkmark", "TUDO CERTO {$_SESSION['userLogin']['user_name']}", "A Imagem Foi Excluída Com Sucesso!"];
+            $jSON['success'] = true;
+            //$jSON['trigger'] = AjaxErro("TUDO CERTO {$_SESSION['userLogin']['user_name']}, A Imagem Foi Excluída Com Sucesso!");
             break;  
             
         case 'gallery_legend':
@@ -248,7 +253,7 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
     if ($jSON):
         echo json_encode($jSON);
     else:
-        $jSON['alert'] = ["red", "wondering2", "Desculpe {$_SESSION['userLogin']['user_name']}", "Uma Ação Do Sistema Não Respondeu Corretamente. Ao Persistir, Contate o Desenvolvedor!"];
+        $jSON['trigger'] = AjaxErro( "Desculpe {$_SESSION['userLogin']['user_name']},Uma Ação Do Sistema Não Respondeu Corretamente. Ao Persistir, Contate o Desenvolvedor!");
         echo json_encode($jSON);
     endif;
 else:

@@ -76,6 +76,7 @@ define ('DB_GALLERY', 'itv_gallery');
 define ('DB_GALLERY_IMAGES', 'itv_gallery_images');
 define ('DB_COUNTRY', 'itv_country');
 define ('DB_INTERVIEW', 'itv_interview');
+define ('DB_INTERVIEW_TYPE', 'itv_interview_type');
 
 
 
@@ -471,6 +472,15 @@ function getTitle($title){
     return $class['course_degree_name'];
 
 }
+function getTeacherName($teacher){
+    $Read = new Read;
+    $Read->ExeRead( DB_TEACHERS, "WHERE teacher_id = {$teacher}");
+    $class = $Read->getResult()[0];
+    return $class['teacher_name'];
+}
+
+
+
 
 
 require 'Config/Functions.inc.php';

@@ -181,6 +181,24 @@ endif;
                         <input type="text"  name="students_lattes" value="<?= $students_lattes; ?>" placeholder="Link do lattes"/>
                     </label>
 
+                    <label class="label">
+                        <span class="legend">Supervisor (Alunos de Pós-Doutorado):</span>
+                        <select name="students_supervisor">
+                            <option selected disabled value="0">Selecione o supervisor:</option>
+                            <?php
+                            $Read->ExeRead(DB_TEACHERS);
+                            foreach ($Read->getResult() as $Teachers):
+                                extract($Teachers);
+                                ?>
+                                <option value="<?=$teacher_id;?>" <?= ($teacher_id == $students_supervisor) ? "selected" : ""; ?>><?=$teacher_name;?></option>
+                            <?php
+                            endforeach;
+
+                            ?>
+                        </select>
+                    </label>
+
+
                     <div class="clear"></div>
 
                     <img class="form_load none fl_right" style="margin-left: 10px; margin-top: 2px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="_img/load.gif"/>

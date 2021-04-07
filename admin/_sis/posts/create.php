@@ -89,8 +89,8 @@ endif;
                 </label>
 
                 <label class="label">
-                    <span class="legend">Subtítulo:</span>
-                    <textarea style="font-size: 1.2em;" name="post_subtitle" rows="3" required><?= $post_subtitle; ?></textarea>
+                    <span class="legend">Subtítulo: (ATÉ 250 CARACTERES)</span>
+                    <textarea style="font-size: 1.2em;" name="post_subtitle" rows="3" maxlength="250" required><?= $post_subtitle; ?></textarea>
                 </label>
 
                 <label class="label">
@@ -125,6 +125,43 @@ endif;
                 </label>
 
                 <label class="label">
+                    <span class="legend">Galeria de Fotos</span>
+                    <select name="post_gallery">
+                        <option value="0"  selected="selected">Selecione uma Galeria:</option>
+                        <?php
+                        $Read->FullRead("SELECT gallery_id, gallery_name FROM " . DB_GALLERY . " WHERE gallery_status =:status", "status=1");
+                        if (!$Read->getResult()):
+                            echo '<option value="0" disabled="disabled">Não existem galerias cadastradas!</option>';
+                        else:
+                            foreach ($Read->getResult() as $Gallery):
+                                echo "<option";
+                                if ($post_gallery == $Gallery['gallery_id']):
+                                    echo " selected='selected'";
+                                endif;
+                                echo " value='{$Gallery['gallery_id']}'>{$Gallery['gallery_name']}</option>";
+                            endforeach;
+                        endif;
+                        ?>
+                    </select>
+                </label>
+                <label class="label">
+                    <span class="legend">Posição da Galeria</span>
+                    <select name="post_gallery_position">
+                        <option value="" selected="selected">Selecione a posição da galeria</option>
+                        <option value="top" <?= ($post_gallery_position=='top' ? "selected='selected'": "");?> >Início da Notícia</option>
+                        <option value="bottom" <?= ($post_gallery_position =='bottom' ? "selected='selected'": "");?>>Final da Notícia</option>
+                    </select>
+                </label>
+                <label class="label">
+                    <span class="legend">Publicar Áudio (Acessibilidade)</span>
+                    <select name="post_audio">
+
+                        <option value="1" <?= ($post_audio ? "selected='selected'": "");?> >Sim</option>
+                        <option value="0" <?= (!$post_audio ? "selected='selected'": "");?>>Não</option>
+                    </select>
+                </label>
+
+                <label class="label">
                     <span class="legend">Post:</span>
                     <textarea class="work_mce" rows="50" name="post_content"><?= $post_content; ?></textarea>
                 </label>
@@ -142,6 +179,8 @@ endif;
             </div>
 
             <div class="post_create_categories">
+                <label class="label">
+                    <span class="legend">Categoria</span>
                 <select name="post_category" required>
                     <option value="" disabled="disabled" selected="selected">Selecione uma seção:</option>
                     <?php
@@ -159,6 +198,7 @@ endif;
                     endif;
                     ?>
                 </select>
+                </label>
 
                 <?php
                 $Read->FullRead("SELECT category_id, category_title FROM " . DB_CATEGORIES . " WHERE category_parent IS NULL");

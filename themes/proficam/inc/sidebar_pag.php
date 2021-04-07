@@ -5,11 +5,12 @@ switch ($URL[0]){
     case 'estrutura-curricular':
     case 'integracao-com-a-industria':
     case 'disciplinas':
-        $menu_title = 'Apresentação';
+    case 'linhas-de-pesquisa':
+        $menu_title = 'O Programa';
         $menu_content = '<li '.($URL[0] == "historico" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/historico">Histórico</a></li>
             <li '.($URL[0] == "area-de-concentracao" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/area-de-concentracao">Área de Concentração</a></li>
-            <li '.($URL[0] == "estrutura-curricular" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/estrutura-curricular">Estrutura Curricular</a></li>
-            <li '.($URL[0] == "disciplinas" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/disciplinas">Disciplinas</a></li>
+            <li '.($URL[0] == "linhas-de-pesquisa" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/linhas-de-pesquisa">Linhas de Pesquisa</a></li>
+            <li '.($URL[0] == "estrutura-curricular" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/estrutura-curricular">Estrutura Curricular e Disciplinas</a></li>
             <li '.($URL[0] == "integracao-com-a-industria" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/integracao-com-a-industria">Integração com a Indústria</a></li>';
         break;
     case 'corpo-discente':
@@ -23,7 +24,7 @@ switch ($URL[0]){
                 <li '.($URL[0] == "corpo-discente" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/corpo-discente">Corpo Discente</a></li>
                 <li '.($URL[0] == "egressos" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/egressos">Egressos</a></li>
                 <li '.($URL[0] == "pos-doutorandos" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/pos-doutorandos">Pós-Doutorandos</a></li>
-                <li '.($URL[0] == "colegiado" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/comissoes">Comissões</a></li>
+                <li '.($URL[0] == "comissoes" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/comissoes">Comissões</a></li>
                 <li '.($URL[0] == "secretaria" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/secretaria">Secretaria</a></li>';
         break;
     case 'biblioteca':
@@ -45,11 +46,17 @@ switch ($URL[0]){
                     <li '.($URL[0] == "materiais" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/materiais">Materiais</a></li>';
         break;
     case 'processo-seletivo':
-    case 'processo-seletivo-anteriores':
+    case 'processos-seletivos-anteriores':
         $menu_title = "Processos Seletivos";
         $menu_content = '<li '.($URL[0] == "processo-seletivo" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/processo-seletivo">Processo Seletivo Atual</a></li>
                         <li '.($URL[0] == "processos-seletivos-anteriores" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/processos-seletivos-anteriores">Processos Seletivos Anteriores</a></li>';
         break;
+        case 'defesas':
+            $menu_title = 'Defesas';
+            $menu_content = '<li '.($URL[0] == "defesas" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/defesas">Defesas</a></li>
+                    <li><a href="https://www.repositorio.ufop.br/handle/123456789/10028" target="_blank">Repositório de Dissertações</a></li>';
+            break;
+
     case 'perguntas-frequentes':
     case 'fale-conosco':
         $menu_title = 'Contato';

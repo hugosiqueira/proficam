@@ -163,12 +163,7 @@ else:
           <div class="col-sm-8">
             <div class="pb-1 text-secondary"><?=$teacher_email;?></div>
           </div>
-          <div class="col-sm-4">
-            <div class="pb-1"><strong>Telefone:</strong></div>
-          </div>
-          <div class="col-sm-8">
-            <div class="pb-1 text-secondary"><?= SITE_ADDR_PHONE_A;?></div>
-          </div>
+
 
         </div>
       </div>

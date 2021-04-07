@@ -96,11 +96,20 @@ endif;
                     <span class="legend">Descrição:</span>
                     <textarea style="font-size: 1.2em;" name="page_subtitle" rows="3" placeholder="Sobre a Página:" required><?= $page_subtitle; ?></textarea>
                 </label>
+                <label class="label">
+                    <span class="legend">Publicar Áudio (Acessibilidade)</span>
+                    <select name="page_audio">
+
+                        <option value="1" <?= ($page_audio ? "selected='selected'": "");?> >Sim</option>
+                        <option value="0" <?= (!$page_audio ? "selected='selected'": "");?>>Não</option>
+                    </select>
+                </label>
 
                 <label class="label">
                     <span class="legend">Conteúdo:</span>
                     <textarea name="page_content" class="work_mce" rows="10" placeholder="Conteúdo da Página:"><?= $page_content; ?></textarea>
                 </label>
+
                 <div class="clear"></div>
             </div>
         </div>
@@ -123,6 +132,35 @@ endif;
                 <label class="label">
                     <span class="legend">Capa:</span>
                     <input type="file" class="wc_loadimage" name="page_cover"/>
+                </label>
+
+                <label class="label">
+                    <span class="legend">Galeria de Fotos</span>
+                    <select name="page_gallery">
+                        <option value="0"  selected="selected">Selecione uma Galeria:</option>
+                        <?php
+                        $Read->FullRead("SELECT gallery_id, gallery_name FROM " . DB_GALLERY . " WHERE gallery_status =:status", "status=1");
+                        if (!$Read->getResult()):
+                            echo '<option value="0" disabled="disabled">Não existem galerias cadastradas!</option>';
+                        else:
+                            foreach ($Read->getResult() as $Gallery):
+                                echo "<option";
+                                if ($page_gallery == $Gallery['gallery_id']):
+                                    echo " selected='selected'";
+                                endif;
+                                echo " value='{$Gallery['gallery_id']}'>{$Gallery['gallery_name']}</option>";
+                            endforeach;
+                        endif;
+                        ?>
+                    </select>
+                </label>
+                <label class="label">
+                    <span class="legend">Posição da Galeria</span>
+                    <select name="page_gallery_position">
+                        <option value="" selected="selected">Selecione a posição da galeria</option>
+                        <option value="top" <?= ($page_gallery_position == 'top' ? "selected='selected'": "");?> >Início da Página</option>
+                        <option value="bottom" <?= ($page_gallery_position == 'bottom' ? "selected='selected'": "");?>>Final da Página</option>
+                    </select>
                 </label>
 
                 <?php if (APP_LINK_PAGES): ?>

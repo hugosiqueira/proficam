@@ -18,18 +18,22 @@ endif;
 $S = filter_input(INPUT_GET, "s", FILTER_DEFAULT);
 $O = filter_input(INPUT_GET, "opt", FILTER_DEFAULT);
 $C = filter_input(INPUT_GET, "c", FILTER_DEFAULT);
+$D = filter_input(INPUT_GET, "d", FILTER_DEFAULT);
 
 $WhereString = (!empty($S) ? " AND (students_name LIKE '%{$S}%')" : "");
-$WhereOpt = (!empty($O) ? " AND students_status = {$O}" : "");
-$WhereClass = (!empty($C) ? " AND students_class = {$C}" : "");
+$WhereOpt = (!empty($O) ? " AND students_status = {$O} " : "");
+$WhereClass = (!empty($C) ? " AND students_class = {$C} " : "");
+$WhereDegree = (!empty($D) ? " AND students_degree = {$D} " : "");
 
 $Search = filter_input_array(INPUT_POST);
-if ($Search && (isset($Search['s']) || isset($Search['opt']) || isset($Search['c']) )):
+if ($Search && (isset($Search['s']) || isset($Search['opt']) || isset($Search['c']) || isset($Search['d']) )):
     $S = urlencode($Search['s']);
     $O = urlencode($Search['opt']);
     $C = urlencode($Search['c']);
+    $D = urlencode($Search['d']);
 
-    header("Location: dashboard.php?wc=alunos/home&opt={$O}&s={$S}&c={$C}");
+
+    header("Location: dashboard.php?wc=alunos/home&opt={$O}&s={$S}&c={$C}&d={$D}");
     exit;
 endif;
 ?>
@@ -81,9 +85,9 @@ endif;
     <?php
     $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
     $Page = ($getPage ? $getPage : 1);
-    $Pager = new Pager("dashboard.php?wc=alunos/home&opt={$O}&s={$S}&c={$C}&page=", "<<", ">>", 5);
+    $Pager = new Pager("dashboard.php?wc=alunos/home&opt={$O}&s={$S}&c={$C}&d={$D}&page=", "<<", ">>", 5);
     $Pager->ExePager($Page, 12);
-    $Read->ExeRead(DB_STUDENTS, "WHERE 1 = 1 $WhereString $WhereOpt $WhereClass ORDER BY students_name ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
+    $Read->ExeRead(DB_STUDENTS, "WHERE 1 = 1 $WhereString $WhereOpt $WhereClass $WhereDegree ORDER BY students_name ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
     if (!$Read->getResult()):
         $Pager->ReturnPage();
         echo Erro("<span class='al_center icon-notification'>Ainda não existem alunos cadastrados {$Admin['user_name']}. Comece agora mesmo cadastrando um novo aluno!</span>", E_USER_NOTICE);
@@ -107,7 +111,7 @@ endif;
                     </div>
                 </article>";
         endforeach;
-        $Pager->ExePaginator(DB_STUDENTS, "WHERE 1 = 1" . $WhereString . $WhereOpt . $WhereClass );
+        $Pager->ExePaginator(DB_STUDENTS, "WHERE 1 = 1" . $WhereString . $WhereOpt . $WhereClass . $WhereDegree );
         echo $Pager->getPaginator();
     endif;
     ?>

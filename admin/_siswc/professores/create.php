@@ -93,6 +93,8 @@ endif;
                                 <option selected disabled value="">Selecione o vínculo do professor:</option>
                                 <option value="1"<?= ($teacher_status == 1 ? "selected" : "")?>>Permanente</option>
                                 <option value="2"<?= ($teacher_status == 2 ? "selected" : "")?>>Colaborador</option>
+
+                                <option value="3"<?= ($teacher_status == 3 ? "selected" : "")?>>Visitante</option>
                                 <option value="0" <?= ($teacher_status == 0 ? "selected" : "")?>>Inativo</option>
                             </select>
                         </label>

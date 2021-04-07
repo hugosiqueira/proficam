@@ -110,18 +110,19 @@ class Seo {
             else:
                 $this->set404();
             endif;
-        elseif ($this->File == 'artigos'):
-            //ARTIGOS
-            $Read->FullRead("SELECT category_title, category_content FROM " . DB_CATEGORIES . " WHERE category_name = :nm", "nm={$this->Link}");
+        elseif ($this->File == 'professor'):
+            //ARTIGO
+            $Read->FullRead("SELECT teacher_name, teacher_resume, teacher_thumb FROM " . DB_TEACHERS . " WHERE teacher_link = :nm", "nm={$this->Link}");
             if ($Read->getResult()):
-                $Category = $Read->getResult()[0];
+                $Post = $Read->getResult()[0];
                 $this->Schema = 'WebSite';
-                $this->Title = $Category['category_title'] . " - " . SITE_NAME;
-                $this->Description = $Category['category_content'];
-                $this->Image = INCLUDE_PATH . '/images/default.jpg';
+                $this->Title = $Post['teacher_name'] . " - " . SITE_NAME;
+                $this->Description = $Post['teacher_resume'];
+                $this->Image = BASE . "/uploads/{$Post['teacher_thumb']}";
             else:
                 $this->set404();
             endif;
+
         elseif ($this->File == 'pesquisa'):
             //PESQUISA
             $this->Schema = 'WebSite';
@@ -270,6 +271,11 @@ class Seo {
             else:
                 $this->set404();
             endif;
+        elseif($this->File == 'artigos'):
+            $this->Schema = 'WebSite';
+            $this->Title =  "Notícias - " . SITE_NAME;
+            $this->Description = "Veja as últimas novidades do PROFICAM.";
+            $this->Image =  INCLUDE_PATH . '/images/default.jpg';
         elseif($this->File == 'corpo-docente'):
                 $this->Schema = 'WebSite';
                 $this->Title =  "Corpo Docente - " . SITE_NAME;
@@ -303,6 +309,11 @@ class Seo {
         elseif($this->File == 'historico'):
             $this->Schema = 'WebSite';
             $this->Title =  "Histórico - " . SITE_NAME;
+            $this->Description = "Nossos docentes possui qualificação e experiência comprovada para te ensinar as melhores e atuais tecnologias do mercado.";
+            $this->Image =  INCLUDE_PATH . '/images/default.jpg';
+        elseif($this->File == 'linhas-de-pesquisa'):
+            $this->Schema = 'WebSite';
+            $this->Title =  "Linhas de Pesquisa - " . SITE_NAME;
             $this->Description = "Nossos docentes possui qualificação e experiência comprovada para te ensinar as melhores e atuais tecnologias do mercado.";
             $this->Image =  INCLUDE_PATH . '/images/default.jpg';
         elseif($this->File == 'area-de-concentracao'):
@@ -390,6 +401,8 @@ class Seo {
             $this->Title =  "Fale Conosco - " . SITE_NAME;
             $this->Description = "Nossos docentes possui qualificação e experiência comprovada para te ensinar as melhores e atuais tecnologias do mercado.";
             $this->Image =  INCLUDE_PATH . '/images/default.jpg';
+
+
         else:
             //404
             $this->set404();

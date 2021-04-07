@@ -24,7 +24,7 @@ endif;
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-9 ftco-animate text-center">
-                    <h1 class="mb-2 bread">Notícias da Proficam</h1>
+                    <h1 class="mb-2 bread">Notícias</h1>
                     <p class="breadcrumbs"><span class="mr-2"><a href="<?= BASE; ?>">Início <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="<?= BASE; ?>/artigos">Últimas Notícias <i class="ion-ios-arrow-forward"></i></a></span> </p>
                 </div>
             </div>
@@ -35,6 +35,40 @@ endif;
 		<div class="row">
             <div class="col-lg-8 ftco-animate">
                 <h2 class="mb-3"><?= $post_title; ?></h2>
+                <?php if($post_audio): ?>
+                <div id="audimaWidget"></div>
+                <script src="//audio.audima.co/audima-widget.js"></script>
+                <style>
+                    #audimaWidget{
+                     height: 70px !important;
+                    }
+                    div[id ~="audima-banner"] {
+                      display:none !important;
+                    }
+                </style>
+                <?php endif; ?>
+                <?php
+                    if($post_gallery && ($post_gallery_position == 'top')):
+                ?>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+                    <div class="lightbox-gallery">
+                        <div class="container">
+
+                            <div class="row photos">
+                                <?php
+                                $Read->FullRead("SELECT * FROM ".DB_GALLERY." p LEFT JOIN " .DB_GALLERY_IMAGES. " s ON p.gallery_id = s.gallery_id WHERE p.gallery_id = :id", "id={$post_gallery}");
+                                foreach($Read->getResult() as $Images):
+                                    extract($Images);
+                                ?>
+                                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="<?= BASE . "/uploads/" . $gallery_image_file;?>" data-lightbox="photos"><img class="img-fluid" src="<?= BASE . "/tim.php?src=uploads/" . $gallery_image_file."&w=200&h=200";?>"></a></div>
+                                <?php endforeach;?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    endif;
+                    ?>
                 <?php
                 if ($post_video):
                     echo "<div class='embed-container'>";
@@ -53,42 +87,44 @@ endif;
                 ?>
                 <!--h2 class="tagline"><?= $post_subtitle; ?></-->
                 <div class="htmlchars">
+                <!-- Start Audima Widget Injection -->
+
                     <?= $post_content; ?>
                 </div>
                 <?php
+                    if($post_gallery && ($post_gallery_position == 'bottom')):
+                    ?>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+                    <div class="lightbox-gallery">
+                        <div class="container">
+                            <div class="intro">
+                                <h4 class="text-center"></h4>
+                            </div>
+                            <div class="row photos">
+                                <?php
+                                $Read->FullRead("SELECT * FROM ".DB_GALLERY." p LEFT JOIN " .DB_GALLERY_IMAGES. " s ON p.gallery_id = s.gallery_id WHERE p.gallery_id = :id", "id={$post_gallery}");
+                                foreach($Read->getResult() as $Images):
+                                    extract($Images);
+                                ?>
+                                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="<?= BASE . "/uploads/" . $gallery_image_file;?>" data-lightbox="photos"><img class="img-fluid" src="<?= BASE . "/tim.php?src=uploads/" . $gallery_image_file."&w=200&h=200";?>"></a></div>
+                                <?php endforeach;?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    endif;
+                    ?>
+                <?php
                 require './_cdn/widgets/share/share.wc.php';
 
-                /*$Read->ExeRead(DB_POSTS, "WHERE post_status = 1 AND post_date <= NOW() AND post_category_parent = :ct AND post_id != :id ORDER BY post_date DESC LIMIT 4", "ct={$post_category_parent}&id={$post_id}");
-                if ($Read->getResult()):
-                    echo '<section class="single_post_more">';
-                    echo '<header>';
-                    echo '<h1>Veja Também:</h1>';
-                    echo '<p>Artigos Relacionados</p>';
-                    echo '</header>';
 
-                    foreach ($Read->getResult() as $More):
-                        ?>
-                        <article class="single_post_more_post">
-                            <a title="Ler mais sobre <?= $More['post_title']; ?>" href="<?= BASE; ?>/artigo/<?= $More['post_name']; ?>">
-                                <?php if (!empty($More['post_cover'])): ?>
-                                    <img title="<?= $More['post_title']; ?>" alt="<?= $More['post_title']; ?>" src="<?= BASE; ?>/tim.php?src=uploads/<?= $More['post_cover']; ?>&w=<?= IMAGE_W / 2; ?>&h=<?= IMAGE_H / 2; ?>"/>
-                                <?php elseif (!empty($More['post_video'])): ?>
-                                    <img title="<?= $More['post_title']; ?>" alt="<?= $More['post_title']; ?>" src="https://i1.ytimg.com/vi/<?= $More['post_video']; ?>/maxresdefault.jpg"/>
-                                <?php else: ?>
-                                    <img title="<?= $More['post_title']; ?>" alt="<?= $More['post_title']; ?>" src="<?= BASE; ?>/tim.php?src=uploads/<?= $More['post_cover']; ?>&w=<?= IMAGE_W / 2; ?>&h=<?= IMAGE_H / 2; ?>"/>
-                                <?php endif; ?>
-                            </a>
-                        </article>
-                        <?php
-                    endforeach;
-                    //echo '</section>';
-                endif;*/
                 ?>
                 <div class="clear"></div>
             </div>
 
 
-        <?php require REQUIRE_PATH . '/inc/sidebar_post.php'; ?>
+        <?php require REQUIRE_PATH . '/inc/sidebar.php'; ?>
         <div class="clear"></div>
     </div>
 </div>

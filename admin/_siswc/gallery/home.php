@@ -8,7 +8,7 @@ endif;
 if (empty($Read)):
     $Read = new Read;
 endif;
-
+/*
 //AUTO DELETE POST TRASH
 if (DB_AUTO_TRASH):
     $Delete = new Delete;
@@ -24,10 +24,10 @@ if (DB_AUTO_TRASH):
             endif;
         endforeach;
     endif;
-endif;
+endif;*/
 ?>
 
-<header class="dashboard_header"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<header class="dashboard_header">
     <div class="dashboard_header_title">
         <h1 class="icon-images">Galerias de Fotos</h1>
         <p class="dashboard_header_breadcrumbs">
@@ -61,20 +61,23 @@ endif;
             $gallery_status = ($gallery_status == 1 ? '<span class="icon-checkmark font_blue">Publicada</span>' : '<span class="icon-warning font_yellow">Rascunho</span>');
             $gallery_cover = (!empty($gallery_cover) ? BASE . "/tim.php?src=uploads/{$gallery_cover}&w=" . IMAGE_W / 4 . "&h=" . IMAGE_H / 4 . "" : "");
 
-            echo "<article class='box box25 page_single wc_draganddrop js-rel-to' callback='Gallery' callback_action='gallery_order' id='{$gallery_id}'>
-        <img alt='{$gallery_name}' title='{$gallery_name}' src='{$gallery_cover}'/>
-        <div class='box_content wc_normalize_height'>
+            echo "<article class='box box25 post_single' id='{$gallery_id}'>
+<div class='post_single_cover'>
+    <img alt='{$gallery_name}' title='{$gallery_name}' src='{$gallery_cover}'/>
+</div>
+        <div class='post_single_content wc_normalize_height'>
             <h1 class='title'>{$gallery_name}</h1>
             <p>{$gallery_status}</p>
         </div>
-        <div class='page_single_action'>
-            <a title='Editar Galeria' href='dashboard.php?wc=gallery/create&id={$gallery_id}' class='post_single_center icon-pencil icon-notext btn_header btn_darkblue'></a>
-            <span title='Excluir Galeria' rel='page_single' class='j_delete_action icon-bin icon-notext btn_header btn_red' callback='Gallery' callback_action='delete' id='{$gallery_id}'></span>
+        <div class='post_single_actions'>
+            <a title='Editar Galeria' href='dashboard.php?wc=gallery/create&id={$gallery_id}' class='post_single_center icon-pencil btn btn_blue'>Editar Galeria</a>
+            <span title='Excluir Galeria' rel='post_single' class='j_delete_action icon-cancel-circle btn btn_red' id='{$gallery_id}'>Deletar</span>
+            <span rel='post_single' callback='Gallery' callback_action='delete' class='j_delete_action_confirm icon-warning btn btn_yellow' style='display: none' id='{$gallery_id}'>Deletar Galeria?</span>
         </div>
     </article>";
         endforeach;
 
-        $Paginator->ExePaginator(DB_PAGES);
+        $Paginator->ExePaginator(DB_GALLERY);
         echo $Paginator->getPaginator();
     endif;
     ?>

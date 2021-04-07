@@ -57,7 +57,7 @@ else:
         <head>
             <meta charset="UTF-8">
         <meta name="mit" content="2017-12-04T19:31:24-02:00+9549">
-            <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=0">
+            <meta name="viewport" content="width=device-width">
 
             <title><?= $SEO->getTitle(); ?></title>
             <meta name="description" content="<?= $SEO->getDescription(); ?>"/>
@@ -119,11 +119,11 @@ else:
             <meta property="twitter:url" content="<?= BASE; ?>/<?= $getURL; ?>" />           
 
             <link rel="shortcut icon" href="<?= INCLUDE_PATH; ?>/images/favicon.png"/>
-            <link href='https://fonts.googleapis.com/css?family=<?= SITE_FONT_NAME; ?>:<?= SITE_FONT_WHIGHT; ?>' rel='stylesheet' type='text/css'>
+            <link href='https://fonts.googleapis.com/css?family=<?= SITE_FONT_NAME; ?>:<?= SITE_FONT_WHIGHT; ?>&display=swap' rel='stylesheet' type='text/css'>
             <style>*{font-family: '<?= SITE_FONT_NAME; ?>', sans-serif;}</style>
 
             <link rel="stylesheet" href="<?= BASE; ?>/_cdn/bootcss/reset.css"/>
-            <link rel="stylesheet" href="<?= BASE; ?>/_cdn/bootcss/fonticon.css"/>
+            <link rel="stylesheet" rel="preload" href="<?= BASE; ?>/_cdn/bootcss/fonticon.css"/>
             <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900&display=swap"
           rel="stylesheet">
 
@@ -192,7 +192,8 @@ else:
             ?>
 
         </head>
-        <body>        
+        <body>
+        <div id="google_translate_element"></div>
             <?php
             // MESSAGE MAINTENANCE FOR ADMIN        
             if (ADMIN_MAINTENANCE && !empty($_SESSION['userLogin']['user_level']) && $_SESSION['userLogin']['user_level'] >= 6):
@@ -299,7 +300,15 @@ else:
                 echo "<script>(function (i, s, o, g, r, a, m) {i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {(i[r].q = i[r].q || []).push(arguments)}, i[r].l = 1 * new Date();a = s.createElement(o),m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m)})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');ga('create', '" . SEGMENT_GL_ANALYTICS_UA . "', 'auto');ga('send', 'pageview');</script>";
             endif;
             ?>
+        <script>
+            $(function() {
+                $('.zerar_top').on('click', function () {
+                    $('body').css('top', '0px');
+                });
+            });
+        </script>
         </body>
+
 
     </html>
 <?php

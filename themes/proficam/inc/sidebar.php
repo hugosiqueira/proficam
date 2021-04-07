@@ -1,8 +1,14 @@
 <aside class="main_sidebar">
-    <form class="search_form" name="search" action="" method="post" enctype="multipart/form-data">
-        <input type="text" name="s" placeholder="Pesquisar Artigos:" required/>
-        <button class="btn btn_blue">Pesquisar</button>
-    </form>
+
+    <div class="sidebar-box">
+        <form class="search-form" name="search" action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <span class="icon icon-search"></span>
+                <input type="text" name="s" class="form-control" placeholder="Pesquisar..."/>
+            </div>
+        </form>
+    </div>
+
 
     <article class="main_sidebar_widget">
         <h1><span><?= SITE_NAME; ?></span></h1>
@@ -52,7 +58,7 @@
                     </a>
                     <header>
                         <h1><a title="Ler mais sobre <?= $Post['post_title']; ?>" href="<?= BASE; ?>/artigo/<?= $Post['post_name']; ?>"><?= $Post['post_title']; ?></a></h1>
-                        <p class="tagline"><?= $Post['post_subtitle']; ?></p>
+                        <p class="tagline text-dark"><?= $Post['post_subtitle']; ?></p>
                     </header>
                 </article>
                 <?php

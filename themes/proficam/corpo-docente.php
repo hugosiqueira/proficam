@@ -11,12 +11,12 @@
 </section>
 
 <section class="ftco-section bg-light">
-    <div class="container-fluid px-4">
+    <div class="container px-4">
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
             <?php
-                $Read->ExeRead(DB_TEACHERS, "WHERE (teacher_status = :status OR teacher_status = :status2) ORDER BY teacher_name ASC", "status=1&status2=2");
+                $Read->ExeRead(DB_TEACHERS, "WHERE (teacher_status <> :status ) ORDER BY teacher_name ASC", "status=0");
                 if (!$Read->getResult()):
                     echo Erro("Ainda Não existe professores. Favor volte mais tarde :)", E_USER_NOTICE);
                 else:
@@ -27,29 +27,19 @@
                     $ultimoNome = array_pop($partes);
                     $teacher_name = $primeiroNome . " ". $ultimoNome;
                 ?>
-                <div class="col col-md-4 col-lg-4 ftco-animate curriculo">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url(<?= BASE; ?>/tim.php?src=<?= (!$teacher_thumb ? 'admin/_img/no_avatar.jpg' : 'uploads/'.$teacher_thumb); ?>&w=300&h=300););"></div>
-                        </div>
+                <div class="col col-md-4 col-lg-4 ftco-animate mx-auto text-center">
+                    <div class="staff mx-auto text-center">
+                        <img class="img-wrap" src="<?= BASE; ?>/tim.php?src=<?= (!$teacher_thumb ? 'admin/_img/no_avatar.jpg' : 'uploads/'.$teacher_thumb); ?>&w=150&h=150" alt="<?=$teacher_name;?>" />
                         <div class="text pt-3 text-center">
-                            <h3><?= $teacher_name;?></h3>
-
-                            <span class="position mb-2"><?= getTitle($teacher_title);?></span>
+                            <h5><?= ($teacher_social_name ? $teacher_social_name :$teacher_name);?></h5>
+                            <span class="position mb-2"></span>
                             <div class="faded">
-                                <?php if($teacher_productivity): ?>
-                                    <p><strong><?=$teacher_scholarship;?></strong></p>
-                                <?php endif; ?>
-
-                                <!--p><?= $teacher_resume;?></p-->
 
                                 <ul class="ftco-social text-center">
                                     <li class="ftco-animate">
-                                        <a class="btn btn-sm btn-primary"  href="<?= BASE . "/professor/".$teacher_link;?>">Detalhes</a>
+                                        <a class="btn btn-sm btn-primary"  href="<?= BASE . "/professor/".$teacher_link;?>">Perfil Completo</a>
                                     </li>
-                                    <!--li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li-->
+
                                 </ul>
                             </div>
                         </div>

@@ -227,9 +227,10 @@ function getCountry($country){
 }
 function getTeacherStatus($status){
     $StatusTeachers = [
+        0 => 'Inativo',
         1 => 'Permanente',
         2 => 'Colaborador',
-        3 => 'Inativo'
+        3 => 'Visitante'
 
     ];
     if (!empty($status)):
@@ -238,3 +239,5 @@ function getTeacherStatus($status){
         return $StatusTeachers;
     endif;
 }
+
+

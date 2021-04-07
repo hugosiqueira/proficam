@@ -5,6 +5,8 @@ $(document).ready(function(){
         });
     });
 });
+//GALLERY IMAGE REMOVE
+
 
 //Fecha Modal Para Edição da Legenda
 $('.modal_legend_content .modal_cancel').click(function(){
@@ -50,6 +52,6 @@ $('.j_form_legend').on('submit', function(e){
         }
     });
     $('.modal_legend').fadeOut();
-}); 
+});
 
 

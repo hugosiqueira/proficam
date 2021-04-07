@@ -19,18 +19,38 @@
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="ftco-footer-widget mb-5">
-                    <h2 class="ftco-heading-2">Próxima Defesa</h2>
+                    <h2 class="ftco-heading-2">Última Notícia</h2>
+                    <?php
+
+                    $Read->ExeRead(DB_POSTS, "WHERE post_category <> :category AND post_status = :status AND post_date <= :date ORDER BY post_date DESC LIMIT :limit", "category=4&status=1&date=".date('Y-m-d H:i:s')."&limit=1}");
+                    if (!$Read->getResult()):
+                        $Pager->ReturnPage();
+                        echo Erro("Ainda Não existe posts cadastrados. Favor volte mais tarde :)", E_USER_NOTICE);
+                    else:
+
+                    foreach ($Read->getResult() as $Post):
+                    extract($Post);
+
+                    ?>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <a  href="<?= BASE; ?>/artigo/<?= $post_name; ?>" class="blog-img mr-4"><img src="<?= BASE; ?>/uploads/<?= $post_cover; ?>" alt="<?=$post_title;?>"/></a>
                         <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                            <h3 class="heading"><a href="<?= BASE; ?>/artigo/<?= $post_name; ?>"><?= $post_title; ?></a></h3>
                             <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                <?php
+                                setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+                                date_default_timezone_set('America/Sao_Paulo');
+                                $dia = utf8_encode(strftime(' %d', strtotime($post_date)));
+                                $mes = utf8_encode(strftime(' %B', strtotime($post_date)));
+                                $ano = utf8_encode(strftime(' %Y', strtotime($post_date)));
+                                ?>
+                                <div><a href="#"><span class="icon-calendar"></span><?= $dia .' de '. $mes . ' de ' . $ano?></a></div>
+
                             </div>
                         </div>
                     </div>
+                    <?php
+                    endforeach;  endif;?>
 
                 </div>
             </div>
@@ -42,7 +62,7 @@
                         <li><a href="<?= BASE ;?>/historico"><span class="ion-ios-arrow-round-forward mr-2"></span>Histórico</a></li>
                         <li><a href="<?= BASE ;?>/corpo-docente"><span class="ion-ios-arrow-round-forward mr-2"></span>Corpo Docente</a></li>
                         <li><a href="<?= BASE ;?>/normas-e-procedimentos"><span class="ion-ios-arrow-round-forward mr-2"></span>Normas e Procedimentos</a></li>
-                        <li><a target="_blank" href="https://www.repositorio.ufop.br/handle/123456789/10028"><span class="ion-ios-arrow-round-forward mr-2"></span>Repositório de Dissertações</a></li>
+                        <li><a target="_blank" rel="noopener" href="https://www.repositorio.ufop.br/handle/123456789/10028"><span class="ion-ios-arrow-round-forward mr-2"></span>Repositório de Dissertações</a></li>
                         <li><a href="<?= BASE ;?>/defesas"><span class="ion-ios-arrow-round-forward mr-2"></span>Próximas Defesas</a></li>
                         <li><a href="<?= BASE ;?>/artigos"><span class="ion-ios-arrow-round-forward mr-2"></span>Notícias</a></li>
                         <li><a href="<?= BASE ;?>/fale-conosco"><span class="ion-ios-arrow-round-forward mr-2"></span>Fale Conosco</a></li>
@@ -75,7 +95,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <p>
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    Copyright &copy;<?=date('Y')?>
                     Todos direitos reservados | <?= SITE_NAME; ?> | UFOP / ITV
                 </p>
             </div>
@@ -106,3 +126,44 @@
 <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="<?= BASE; ?>/_cdn/js/google-map.js"></script-->
 <script src="<?= BASE; ?>/_cdn/js/main.js"></script>
+
+<!-- O Javascript deve vir depois -->
+
+<script>
+    var comboGoogleTradutor = null; //Varialvel global
+
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'pt',
+            includedLanguages: 'es,en,pt',
+            layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+        }, 'google_translate_element');
+
+        comboGoogleTradutor = document.getElementById("google_translate_element").querySelector(".goog-te-combo");
+    }
+
+    function changeEvent(el) {
+        if (el.fireEvent) {
+            el.fireEvent('onchange');
+            document.querySelector("body").style.top ="0px";
+        } else {
+            var evObj = document.createEvent("HTMLEvents");
+
+            evObj.initEvent("change", false, true);
+            el.dispatchEvent(evObj);
+            document.querySelector("body").style.top ="0px";
+        }
+    }
+
+    function trocarIdioma(sigla) {
+        if (comboGoogleTradutor) {
+            comboGoogleTradutor.value = sigla;
+            changeEvent(comboGoogleTradutor);//Dispara a troca
+            document.querySelector("body").style.top ="0px";
+
+        }
+
+    }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
