@@ -77,6 +77,10 @@ define ('DB_GALLERY_IMAGES', 'itv_gallery_images');
 define ('DB_COUNTRY', 'itv_country');
 define ('DB_INTERVIEW', 'itv_interview');
 define ('DB_INTERVIEW_TYPE', 'itv_interview_type');
+define ('DB_SELECTION_PROCESS', 'itv_selection_process');
+define ('DB_SELECTION_PROCESS_SCHEDULE', 'itv_selection_process_schedule');
+define ('DB_SELECTION_PROCESS_FILES', 'itv_selection_process_files');
+
 
 
 

@@ -98,7 +98,7 @@ endif;
                     <div class="col-md-6 col-lg-4 ftco-animate">
                         <div class="blog-entry">
                             <a class="block-20 d-flex align-items-end img" href="<?= BASE; ?>/artigo/<?= $post_name; ?>"
-                               style="background-image: url('<?= BASE; ?>/uploads/<?= $post_cover; ?>');width: 350px;height: 255px;">
+                               style="background-image: url('<?= BASE; ?>/uploads/<?= $post_cover; ?>');width: 95%;">
                                 <div class="meta-date text-center p-2">
                                     <?php
                                     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');

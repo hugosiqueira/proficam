@@ -10,8 +10,11 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center align-items-center pl-2" >
-                <a class="navbar-brand" href="<?= BASE;?>"><span class="title">Programa de Pós-Graduação em Instrumentação, Controle e Automação de Processos de Mineração</span>PROFICAM <span>ESCOLA DE MINAS - UFOP/ INSTITUTO TECNOLÓGICO VALE</span></a>
+            <div class="d-flex justify-content-center align-items-center" >
+                <a class="navbar-brand" href="<?= BASE;?>">
+                    <img alt='Proficam'  class="logo_desktop"  src="<?= BASE . '/tim.php?src=_cdn/images/logo_proficam.jpg&w=683&h=99';?>"  />
+                    <img alt='Proficam'  class="logo_mobile"  src="<?= BASE . '/tim.php?src=_cdn/images/logo_mobile_proficam.jpg&w=411&h=93';?>"  />
+                </a>
             </div>
             <div class="d-flex align-items-center p-2">
                 <div class="d-flex topper align-items-center justify-content-center align-items-stretch">

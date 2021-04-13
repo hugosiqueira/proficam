@@ -1319,3 +1319,114 @@ function wcUrlParam(name) {
     
     return (results ? results[1] : null);
 }
+
+
+$(function () {
+    //############## MODAL AJAX :: Botao para abrir modal
+    $('body, html').on('click', '.j_ajaxModal', function(){
+        var Action = $(this).attr('callback_action');
+        var CallBack = $(this).attr('callback');
+        var Id = $(this).attr('data-id');
+
+        Data = (Id != undefined) ? {callback: CallBack, callback_action: Action, id: Id} : {callback: CallBack, callback_action: Action};
+
+        $.post('_ajax/' + CallBack + '.ajax.php', Data, function (data) {
+            if (data.modal) {
+                ajaxModal(data.modal.icon, data.modal.title, data.modal.content, data.modal.footer, data.modal.size);
+            }
+            if (data.trigger) {
+                Trigger(data.trigger);
+            }
+        }, 'json');
+
+        return false;
+    });
+
+    //############## MODAL AJAX :: Botao para enviar formulario
+    $('html, body').on('click', '.j_sendFormModal', function(e){
+        var Form = $(this).closest('.ajax_modal').find('form'),
+            Load = Form.find('.form_load'),
+            Footer = $(this).closest('div');
+
+        Load.fadeIn(function(){
+            Form.submit();
+            cloneLoad(Form, Footer);
+        });
+
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    });
+});
+
+//############## MODAL AJAX
+function ajaxModal(Icon, Title, Content, Footer, Size = null) {
+    if (!$('.ajax_modal').length) {
+        if (Size) {
+            if (Size === 'medium') { Size = 'style="width:760px"'; }
+            else if (Size === 'large') { Size = 'style="width:1100px"'; } }
+        else { Size = null; }
+
+        $("body").append('<div class="ajax_modal"><div class="ajax_modal_box" '+Size+'><div class="ajax_modal_head"><span class="ajax_modal_close j_ajaxModalClose icon-cross icon-notext"></span><p class="ajax_modal_title"><span>{TITLE}</span></p></div><div class="ajax_modal_content">{CONTENT}</div><div class="ajax_modal_footer">{FOOTER}</div></div></div>');
+    } else {
+        $('.ajax_modal').remove();
+        $("body").append('<div class="ajax_modal"><div class="ajax_modal_box"><div class="ajax_modal_head"><span class="ajax_modal_close j_ajaxModalClose icon-cross icon-notext"></span><p class="ajax_modal_title"><span>{TITLE}</span></p></div><div class="ajax_modal_content">{CONTENT}</div><div class="ajax_modal_footer">{FOOTER}</div></div></div>');
+    }
+
+    var Modal = $(".ajax_modal_box");
+    var FooHeight = Modal.find('.ajax_modal_footer').height();
+    Modal.find('.ajax_modal_title span').addClass("icon-" + Icon).html(Title);
+    Modal.find('.ajax_modal_content').html(Content).css('margin-bottom', FooHeight);
+    Modal.find('.ajax_modal_footer').html(Footer + '<div class="clear"></div>');
+
+    $('.ajax_modal').fadeIn(200, function(){
+        $('body, html').css('overflow', 'hidden');
+    }).css('display', 'block');
+
+
+    // ###############################
+    // ##### PLUGGINS ################
+
+    // PS: Caso algum pluggin seja necessário dentro da modal ele
+    // deve ser renderizado novamente no momento do carregamento da modal.
+    // O local para chamar o pluggin é aqui!
+
+    //TinyMCE
+    if ($('.work_mce').length) {
+        wc_tinyMCE(); }
+    if ($('.work_mce_basic').length) {
+        wc_tinyMCE_basic(); }
+
+    // ##### END PLUGGINS ############
+    // ###############################
+
+    //MODAL Close
+    $('html').on('click', '.j_ajaxModalClose', function () {
+        $('body, html').css('overflow', 'inherit');
+        $('.ajax_modal').fadeOut(400, function () {
+            $(this).remove();
+        });
+    });
+}
+
+function cloneLoad (Form, Content) {
+    $('.ajax_modal_footer').find('.form_load').remove();
+    // Clona load do formulario e exclui quando o original some
+    var LoadObject = Form.find('.form_load');
+    var Load = document.querySelector( '[load="true"]' );
+    var Observer = new MutationObserver( handleMutationObserver );
+    var Config = { childList: true, attributes: true };
+    Content.append(LoadObject.clone());
+
+    function handleMutationObserver( mutations ) {
+        mutations.forEach(function( mutation ) {
+            if (
+                mutation.target.style.cssText.match(/display: none/) ||
+                mutation.target.style.cssText.match(/display:none/)) {
+                Content.find('.form_load').remove();
+            }
+        });
+    }
+    Observer.observe( Load, Config );
+}
+

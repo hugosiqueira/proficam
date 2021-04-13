@@ -85,6 +85,7 @@ if (!$WorkControlDefineConf):
     define('APP_GALLERY', 1); //Perguntas Frequentes
     define('APP_RESEARCH', 1); // Linhas de Pesquisa
     define('APP_INTERVIEW', 1); // Defesas
+    define('APP_SELECTION_PROCESS',1); // Processo Seletivo
 
 
     /*
@@ -117,6 +118,7 @@ if (!$WorkControlDefineConf):
     define('LEVEL_ITV_FAQ', 6);
     define('LEVEL_ITV_INTERVIEW', 6);
     define('LEVEL_ITV_RESEARCH', 6);
+    define('LEVEL_ITV_SELECTION_PROCESS', 6);
 
 
     /*

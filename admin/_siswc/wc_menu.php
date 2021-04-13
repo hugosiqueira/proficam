@@ -1,3 +1,6 @@
+<li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'depoimentos/') ? 'dashboard_nav_menu_active' : ''; ?>">
+    <a class="icon-pencil" title="Processos Seletivos" href="dashboard.php?wc=processo_seletivo/home">Processos Seletivos</a>
+</li>
 <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'linhas/') ? 'dashboard_nav_menu_active' : ''; ?>">
     <a class="icon-search" title="Linhas de Pesquisa" href="dashboard.php?wc=linhas/home">Linhas de Pesquisa</a>
 </li>
@@ -22,10 +25,6 @@
     </ul>
 </li>
 
-<li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'depoimentos/') ? 'dashboard_nav_menu_active' : ''; ?>">
-    <a class="icon-bubble2" title="Depoimentos" href="dashboard.php?wc=depoimentos/home">Depoimentos</a>
-</li>
-
 <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'defesas/') ? 'dashboard_nav_menu_active' : ''; ?>">
     <a class="icon-checkbox-checked" title="Defesas" href="dashboard.php?wc=defesas/home">Defesas</a>
 </li>
@@ -45,4 +44,9 @@
 
 <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'hello/') ? 'dashboard_nav_menu_active' : ''; ?>">
     <a class="icon-bullhorn" title="Avisos" href="dashboard.php?wc=hello/home">Avisos</a>
+</li>
+
+
+<li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'depoimentos/') ? 'dashboard_nav_menu_active' : ''; ?>">
+    <a class="icon-bubble2" title="Depoimentos" href="dashboard.php?wc=depoimentos/home">Depoimentos</a>
 </li>

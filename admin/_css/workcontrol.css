@@ -273,10 +273,10 @@
 
 /*PANEL FOOTER*/
 .panel_footer{
-    padding: 15px;
+    padding: 15px 0 35px 0;
     border-top: 1px solid #CCC;
     color: #555;
-    font-size: 0.75em;
+    font-size: 1em;
     text-align: right;
     font-weight: 300;
     background: #FFF;
@@ -4531,3 +4531,37 @@ GEO
         margin-bottom: 7px !important;
     }
 }
+
+/* TABELA*/
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 99%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+/*.styled-table tbody tr:hover {
+    color: #009879;
+}*/
