@@ -35,7 +35,7 @@ endif;
             $Page = (!empty($URL[2]) ? $URL[2] : 1);
             $Pager = new Pager(BASE . "/pesquisa/{$SearchPage}/", "<<", ">>", 5);
             $Pager->ExePager($Page, 5);
-            $Read->ExeRead(DB_POSTS, "WHERE post_status = 1 AND post_date <= NOW() AND (post_title LIKE '%' :s '%' OR post_subtitle LIKE '%' :s '%') ORDER BY post_date DESC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}&s={$Search}");
+            $Read->ExeRead(DB_POSTS, "WHERE post_status = 1 AND post_date <= NOW() AND (post_title LIKE '%' :s '%' OR post_subtitle LIKE '%' :s '%' OR post_content LIKE '%' :s '%') ORDER BY post_date DESC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}&s={$Search}");
             if (!$Read->getResult()):
                 $Pager->ReturnPage();
                 echo Erro("Desculpe, mas sua pesquisa para <b>{$Search}</b> não retornou resultados. Talvez você queira utilizar outros termos! Você ainda pode usar nosso menu de navegação para encontrar o que procura!", E_USER_NOTICE);

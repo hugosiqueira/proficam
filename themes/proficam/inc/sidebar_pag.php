@@ -6,10 +6,14 @@ switch ($URL[0]){
     case 'integracao-com-a-industria':
     case 'disciplinas':
     case 'linhas-de-pesquisa':
+    case 'projetos-de-pesquisa':
+    case 'projeto-de-pesquisa':
+    case 'rede-de-relacionamentos':
         $menu_title = 'O Programa';
         $menu_content = '<li '.($URL[0] == "historico" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/historico">Histórico</a></li>
             <li '.($URL[0] == "area-de-concentracao" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/area-de-concentracao">Área de Concentração</a></li>
             <li '.($URL[0] == "linhas-de-pesquisa" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/linhas-de-pesquisa">Linhas de Pesquisa</a></li>
+            <li '.($URL[0] == "projetos-de-pesquisa" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/projetos-de-pesquisa">Projetos de Pesquisa</a></li>
             <li '.($URL[0] == "estrutura-curricular" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/estrutura-curricular">Estrutura Curricular e Disciplinas</a></li>
             <li '.($URL[0] == "integracao-com-a-industria" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/integracao-com-a-industria">Integração com a Indústria</a></li>';
         break;
@@ -49,7 +53,7 @@ switch ($URL[0]){
     case 'processos-seletivos-anteriores':
         $menu_title = "Processos Seletivos";
         $menu_content = '<li '.($URL[0] == "processo-seletivo" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/processo-seletivo">Processo Seletivo Atual</a></li>
-                        <li '.($URL[0] == "processos-seletivos-anteriores" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/processos-seletivos-anteriores">Processos Seletivos Anteriores</a></li>';
+                        <li '.($URL[0] == "processos-seletivos-anteriores" ? "class=font-weight-bolder" :"").'><a href="'.BASE.'/processos-seletivos-anteriores">Processos Seletivos Encerrados</a></li>';
         break;
         case 'defesas':
             $menu_title = 'Defesas';

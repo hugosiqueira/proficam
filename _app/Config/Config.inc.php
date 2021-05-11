@@ -27,7 +27,7 @@ if (!$WorkControlDefineConf):
     /*
      * ADMIN CONFIG
      */
-    define('ADMIN_NAME', 'PROFICAM');  //Nome do painel de controle (Work Control)
+    define('ADMIN_NAME', 'PROFICAM');  //Nome do painel de controle
     define('ADMIN_DESC', 'Painel administrativo do site da PROFICAM'); //Descrição do painel de controle
     define('ADMIN_MODE', 1); //1 = website / 2 = e-commerce / 3 = Imobi / 4 = EAD
     define('ADMIN_WC_CUSTOM', 1); //Habilita menu e telas customizadas
@@ -77,8 +77,6 @@ if (!$WorkControlDefineConf):
     define('APP_USERS', 1); //Usuários
     define('APP_TESTIMONIALS', 1); //Depoimentos
     define('APP_FAQ', 1); //Perguntas Frequentes
-
-
     define('APP_STUDENTS', 1); //Alunos
     define('APP_TEACHERS', 1); //Professores
     define('APP_COURSE', 1); //Curso
@@ -86,6 +84,9 @@ if (!$WorkControlDefineConf):
     define('APP_RESEARCH', 1); // Linhas de Pesquisa
     define('APP_INTERVIEW', 1); // Defesas
     define('APP_SELECTION_PROCESS',1); // Processo Seletivo
+    define('APP_PROJECTS',1); // Projetos de Pesquisa
+    define('APP_SITE_SERVICES', 1); // Caixas de serviços da pagina inicial
+    define('APP_COMPLEMENTS', 1); // Após o conteúdo das páginas dinamicas
 
 
     /*
@@ -119,6 +120,9 @@ if (!$WorkControlDefineConf):
     define('LEVEL_ITV_INTERVIEW', 6);
     define('LEVEL_ITV_RESEARCH', 6);
     define('LEVEL_ITV_SELECTION_PROCESS', 6);
+    define('LEVEL_ITV_PROJECTS', 6);
+    define('LEVEL_ITV_SITE_SERVICES', 6);
+    define('LEVEL_ITV_COMPLEMENTS', 6);
 
 
     /*

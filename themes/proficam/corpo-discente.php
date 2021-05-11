@@ -18,7 +18,7 @@
             <div class="col col-lg-8 ftco-animate">
                 <div class ="row">
                     <?php
-                    $Read->ExeRead(DB_STUDENTS, "WHERE students_status = :status GROUP BY students_class ORDER BY students_class DESC ", "status=1");
+                    $Read->ExeRead(DB_STUDENTS, "WHERE students_status = :status AND students_degree = :degree GROUP BY students_class ORDER BY students_class DESC ", "status=1&degree=2");
                     if (!$Read->getResult()):
                         echo Erro("Ainda Não existe alunos cadastrados. Favor volte mais tarde :)", E_USER_NOTICE);
                     else:
@@ -54,7 +54,7 @@
 
                                             <?php
                                             $Read2 = new Read();
-                                            $Read2->ExeRead(DB_STUDENTS, "WHERE students_status = :status  AND students_class = :class ORDER BY students_name ASC", "status=1&class=$students_class");
+                                            $Read2->ExeRead(DB_STUDENTS, "WHERE students_status = :status  AND students_class = :class AND students_degree = :degree ORDER BY students_name ASC", "status=1&class={$students_class}&degree=2");
                                             if (!$Read2->getResult()):
                                                 echo Erro("Ainda Não existe alunos cadastrados. Favor volte mais tarde :)", E_USER_NOTICE);
                                             else:
@@ -79,6 +79,18 @@
                         <div class="clear"></div>
                         <?php endforeach; endif; ?>
                     </div>
+            <div class="row py-4">
+                <?php
+                $Read->ExeRead(DB_PAGE_COMPLEMENTS, "WHERE complement_name = :name AND complement_status= :status", "name=corpo-discente&status=1");
+                if ($Read->getResult()):
+                    foreach ($Read->getResult() as $complemento) {
+                        extract($complemento);
+                        echo $complement_text;
+                    }
+
+                endif;
+                ?>
+            </div>
                 </div>
             <?php require REQUIRE_PATH . '/inc/sidebar_pag.php'; ?>
             <div class="clear"></div>

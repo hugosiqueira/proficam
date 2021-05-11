@@ -35,7 +35,7 @@ endif;
 
         echo "<div class='licence_box'>"
         . "<span class='icon-checkbox-checked icon-notext font_green auth'></span>"
-        . "<p class='title'>Work Control® Licenciado por <a title='Conferir Profissional' href='https://pro.workcontrol.com.br/?p={$License->user_id}' target='_blank'>{$License->user_name} {$License->user_lastname}</a></p>"
+        . "<p class='title'>Bee System® Licenciado por <a title='Conferir Profissional' href='https://pro.workcontrol.com.br/?p={$License->user_id}' target='_blank'>{$License->user_name} {$License->user_lastname}</a></p>"
         . "<p class='icon-warning'>Licença exclusiva para o domínio <b>{$License->license_domain}</b>.</p>"
         . "<p class='icon-lock key'><b>IP do SERVIDOR:</b>&nbsp;{$License->license_request_ip}</p>"
         . "<p class='icon-key key'><b>CHAVE:</b>&nbsp;{$License->license_hash}</p>"

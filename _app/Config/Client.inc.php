@@ -1,6 +1,7 @@
 <?php
 
 if (!$WorkControlDefineConf):
+
     /*
      * SITE CONFIG
      */
@@ -10,6 +11,21 @@ if (!$WorkControlDefineConf):
 
     define('SITE_FONT_NAME', 'Montserrat'); //Tipografia do site (https://www.google.com/fonts)
     define('SITE_FONT_WHIGHT', '300,400,600,700,800'); //Tipografia do site (https://www.google.com/fonts)
+
+    /*
+     * CONFIGURAÇÕES DA PÁGINA INICIAL
+     * */
+
+    define('SITE_SERVICES_1', 'Corpo Docente'); //SERVIÇO 1 OFERECIDO
+    define('SITE_SERVICES_1_DESC', 'Nosso programa conta com professores qualificados para te orientar com um conteúdo atualizado.');
+    define('SITE_SERVICES_2', 'Integração com a Indústria'); //SERVIÇO 2 OFERECIDO
+    define('SITE_SERVICES_2_DESC', 'Nossos alunos saem preparados para atuar diretamente na indústria, veja alguns cases.'); //SERVIÇO 2 OFERECIDO
+    define('SITE_SERVICES_3', 'Dissertações'); //SERVIÇO 3 OFERECIDO
+    define('SITE_SERVICES_3_DESC', 'Veja todas dissertações que já foram apresentadas em nosso programa.'); //SERVIÇO 2 OFERECIDO
+    define('SITE_SERVICES_4', 'Infraestrutura'); //SERVIÇO 4 OFERECIDO
+    define('SITE_SERVICES_4_DESC', 'Nossos laboratórios contam com as mais novas tecnologias existentes e nossa biblioteca com todo material necessário para sua pesquisa'); //SERVIÇO 2 OFERECIDO
+
+
 
     /*
      * SHIP CONFIG

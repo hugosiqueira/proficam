@@ -55,7 +55,7 @@ endif;
             <span class="crumb">/</span>
             <a title="<?= ADMIN_NAME; ?>" href="dashboard.php?wc=processo_seletivo/home">Processo Seletivo</a>
             <span class="crumb">/</span>
-            Nova Pergunta
+
         </p>
     </div>
 

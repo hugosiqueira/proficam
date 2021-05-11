@@ -28,7 +28,7 @@
     <footer class="content">
         <div class="left">
             &copy; <?= date('Y'); ?> - <?= SITE_NAME; ?><br>
-            Orgulhosamente desenvolvido com Work Control!<br>
+            Orgulhosamente desenvolvido pela Agência Bee!!<br>
             Todos os direitos Reservados!
         </div>
 

@@ -1,4 +1,4 @@
-#Work Control Changelog
+#Bee System Changelog
 
 Version 3.1.4
 + [1834] FIX search tags in posts (Leonardo Berto Rodrigues)

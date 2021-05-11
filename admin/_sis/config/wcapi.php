@@ -13,7 +13,7 @@ endif;
 
 <header class="dashboard_header">
     <div class="dashboard_header_title">
-        <h1 class="icon-cog">Work Control API</h1>
+        <h1 class="icon-cog">Cadastrar API</h1>
         <p class="dashboard_header_breadcrumbs">
             &raquo; <?= ADMIN_NAME; ?>
             <span class="crumb">/</span>

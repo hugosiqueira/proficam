@@ -25,7 +25,7 @@ $Read = new Read;
             <h1>O que é?</h1>
         </header>
         <div class="box_content">
-            <p>A core de APPS personalizados foi criada para que você possa manter o Work Control na versão atual sem maiores problemas.</p>
+            <p>A core de APPS personalizados foi criada para que você possa manter o Bee System na versão atual sem maiores problemas.</p>
             <p>Usando uma estrutura de pastas e arquivos independentes, os Updates de versão ficam muito mais simples e intuítivos!</p>
             Tudo fica muito simples assim!
         </div>

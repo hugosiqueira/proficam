@@ -100,7 +100,7 @@
                     </table>
                 </div>
                 <div id="footer">
-                    Gerado por Work Control® - Todos os direitos reservados!
+                    Gerado por Bee System® - Todos os direitos reservados!
                 </div>
             </body>
         </html>

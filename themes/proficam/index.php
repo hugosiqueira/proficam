@@ -10,62 +10,29 @@ endif;
 <section class="ftco-services ftco-no-pb">
     <div class="container-wrap">
         <div class="row no-gutters">
-            <div class="col-md-3 d-flex services align-self-stretch py-5 px-4 ftco-animate bg-primary">
+            <?php
+            $Read->ExeRead(DB_SITE_SERVICES, " WHERE services_status = :status LIMIT :limit", "status=1&limit=4");
+            $i=0;
+            foreach ($Read->getResult() as $Service):
+            extract($Service);
+            $bg = ($i % 2 == 0 ? 'bg-primary' : 'bg-darken');
+            ?>
+
+            <div class="col-md-3 d-flex services align-self-stretch py-5 px-4 ftco-animate <?=$bg;?>">
                 <div class="media block-6 d-block text-center">
                     <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-teacher"></span>
+                        <i style="color: #ffffff; font-size:48px" class="<?=$services_icon;?>"></i>
                     </div>
                     <div class="media-body p-2 mt-3">
-                        <a href="corpo-docente">
-                            <h3 class="heading">Corpo Docente</h3>
-                            <p class="text-light">Nosso programa conta com professores qualificados para te orientar com um
-                                conteúdo atualizado.</p>
+                        <a href="<?=$services_link;?>">
+                            <h3 class="heading"><?=$services_name;?></h3>
+                            <p class="text-light"><?=$services_description;?></p>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 d-flex services align-self-stretch py-5 px-4 ftco-animate bg-darken">
-                <div class="media block-6 d-block text-center">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-jigsaw"></span>
-                    </div>
-                    <div class="media-body p-2 mt-3">
-                        <a href="integracao-com-a-industria">
-                            <h3 class="heading">Integração com a Indústria</h3>
-                            <p class="text-light">Nossos alunos saem preparados para atuar diretamente na indústria,
-                                veja alguns cases.</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 d-flex services align-self-stretch py-5 px-4 ftco-animate bg-primary">
-                <div class="media block-6 d-block text-center">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-diploma"></span>
-                    </div>
-                    <div class="media-body p-2 mt-3">
-                        <a target="_blank" rel="noopener" href="https://www.repositorio.ufop.br/handle/123456789/10028">
-                            <h3 class="heading">Dissertações</h3>
-                            <p class="text-light">Veja todas dissertações que já foram apresentadas em nosso programa.
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 d-flex services align-self-stretch py-5 px-4 ftco-animate bg-darken">
-                <div class="media block-6 d-block text-center">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-security"></span>
-                    </div>
-                    <div class="media-body p-2 mt-3">
-                        <a href="laboratorios">
-                            <h3 class="heading">Infraestrutura</h3>
-                            <p class="text-light">Nossos laboratórios contam com as mais novas tecnologias existentes e
-                                nossa biblioteca com todo material necessário para sua pesquisa.</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <?php $i++; endforeach; ?>
+
         </div>
     </div>
 </section>
@@ -98,7 +65,7 @@ endif;
                     <div class="col-md-6 col-lg-4 ftco-animate">
                         <div class="blog-entry">
                             <a class="block-20 d-flex align-items-end img" href="<?= BASE; ?>/artigo/<?= $post_name; ?>"
-                               style="background-image: url('<?= BASE; ?>/uploads/<?= $post_cover; ?>');width: 95%;">
+                               style="background-image: url('<?= BASE; ?>/uploads/<?= $post_cover; ?>');width: 100%;">
                                 <div class="meta-date text-center p-2">
                                     <?php
                                     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -118,17 +85,13 @@ endif;
                                        href="<?= BASE; ?>/artigo/<?= $post_name; ?>"><?= $post_title; ?></a>
                                 </h3>
                                 <p class="text-justify"><?= limita_caracteres($post_subtitle, 253, '...'); ?></p>
-                                <div class="d-flex align-items-center mt-4">
+                                <div class="d-flex align-items-end" ">
                                     <p class="mb-0">
                                         <a title="Ler mais sobre <?= $post_title; ?>" class="btn btn-primary"
                                            href="<?= BASE; ?>/artigo/<?= $post_name; ?>">
                                             Saiba Mais
                                             <span class="ion-ios-arrow-round-forward"></span>
                                         </a>
-                                    </p>
-                                    <p class="ml-auto mb-0">
-                                        <!--a class="mr-2" href="#">Proficam</a>
-                                                <a class="meta-chat" href="#"><span class="icon-chat"></span> 3</a-->
                                     </p>
                                 </div>
                             </div>
@@ -178,30 +141,31 @@ endif;
             <div class="col-lg-12">
                 <div class="row d-md-flex align-items-center">
 
+
                     <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                         <div class="block-18">
-                            <div class="icon"><span class="flaticon-doctor"></span></div>
+                            <div class="icon"><span style="color: #ffffff; font-size:36px" class="icon-lab"></span></div>
                             <div class="text">
-                                <strong class="number" data-number="1009">300</strong>
-                                <span>Publicações Científicas</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                        <div class="block-18">
-                            <div class="icon"><span class="flaticon-doctor"></span></div>
-                            <div class="text">
-                                <strong class="number" data-number="29">0</strong>
+                                <strong class="number" data-number="<?=getNumProjects();?>">0</strong>
                                 <span>Projetos de Pesquisa</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                         <div class="block-18">
-                            <div class="icon"><span class="flaticon-doctor"></span></div>
+                            <div class="icon"><span style="color: #ffffff; font-size:36px" class="icon-user"></span></div>
                             <div class="text">
-                                <strong class="number" data-number="104">0</strong>
-                                <span>Discentes e Egressos</span>
+                                <strong class="number" data-number="<?=getNumStudents(1);?>">0</strong>
+                                <span>Discentes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18">
+                            <div class="icon"><span style="color: #ffffff; font-size:36px" class="icon-user-check"></span></div>
+                            <div class="text">
+                                <strong class="number" data-number="<?=getNumStudents(2);?>">0</strong>
+                                <span>Egressos</span>
                             </div>
                         </div>
                     </div>

@@ -72,7 +72,7 @@
                 </ul>
             </div>
             <div class="copy">
-                Orgulhosamente desenvolvido com Work Control!<br>
+                Orgulhosamente desenvolvido pela Agência Bee!<br>
                 Copyright © <?= date('Y'); ?> <?= SITE_NAME; ?> - Todos os direitos reservados.
             </div>
             <div class="clear"></div>

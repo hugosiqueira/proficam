@@ -13,7 +13,7 @@ endif;
 
 <header class="dashboard_header">
     <div class="dashboard_header_title">
-        <h1 class="icon-embed2">Work Control® Samples</h1>
+        <h1 class="icon-embed2">Exemplos de Uso</h1>
         <p class="dashboard_header_breadcrumbs">
             &raquo; <?= ADMIN_NAME; ?>
             <span class="crumb">/</span>

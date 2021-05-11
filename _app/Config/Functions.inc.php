@@ -239,5 +239,17 @@ function getTeacherStatus($status){
         return $StatusTeachers;
     endif;
 }
+function getNumStudents($tipo){
+    $Read = new Read;
+    $Read->FullRead( "SELECT COUNT(*) AS numero FROM ".DB_STUDENTS. " WHERE students_status = :status AND students_degree = :degree", "status={$tipo}&degree=2");
+    $class = $Read->getResult()[0];
+    return $class['numero'];
+}
 
+function getNumProjects(){
+    $Read = new Read;
+    $Read->FullRead( "SELECT COUNT(*) AS numero FROM ".DB_PROJECTS. " WHERE project_status = :status", "status=1");
+    $class = $Read->getResult()[0];
+    return $class['numero'];
+}
 

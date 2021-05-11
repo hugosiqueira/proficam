@@ -26,14 +26,10 @@ if($URL[1]):
     $interview_date = new DateTime($interview_date);
 ?>
 
-
-
 <section class="ftco-section">
 	<div class="container">
 		<div class="row">
             <div class="col-lg-8 ftco-animate">
-
-
                 <div class="htmlchars">
                     <p><strong>Aluno: </strong><?=$students_name;?>
                     <br /><strong>Título: </strong><?=$interview_title;?>
@@ -66,8 +62,8 @@ if($URL[1]):
     <div class="container">
         <div class="row justify-content-center mb-5 pb-2">
             <div class="col-md-8 text-center heading-section ftco-animate">
-                <h2 class="mb-4"><span>Próximas</span> Defesas</h2>
-                <p class="text-dark">Confira as próximas defesas de nosso programa</p>
+                <h2 class="mb-4"><span>Defesas</span> </h2>
+                <p class="text-dark">Confira as defesas de nosso programa</p>
             </div>
         </div>
         <div class="row">

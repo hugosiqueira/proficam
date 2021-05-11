@@ -1,3 +1,22 @@
+
+<script>
+    $(document).ready(function(){
+        // Add minus icon for collapse element which is open by default
+        $(".collapse.show").each(function(){
+            $(this).prev(".card-header").find(".icon").addClass("icon-minus").removeClass("icon-plus");
+            console.log("Entrou1");
+        });
+
+        // Toggle plus minus icon on show hide of collapse element
+        $(".collapse").on('show.bs.collapse', function(){
+            $(this).prev(".card-header").find(".icon").removeClass("icon-plus").addClass("icon-minus");
+            console.log("Entrou2");
+        }).on('hide.bs.collapse', function(){
+            $(this).prev(".card-header").find(".icon").removeClass("icon-minus").addClass("icon-plus");
+            console.log("Entrou23");
+        });
+    });
+</script>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('<?= BASE;?>/_cdn/images/bg_1.jpg');">
     <div class="overlay"></div>
     <div class="container">
@@ -20,23 +39,23 @@
                     if (!$Read->getResult()):
                         echo Erro("Ainda Não existe alunos cadastrados. Favor volte mais tarde :)", E_USER_NOTICE);
                     else:
+                    $i=0;
 
                         foreach ($Read->getResult() as $Alunos):
                             extract($Alunos);
                             ?>
-                            <div class="accordion" style="width:90%;" id="corpo-discente<?=$students_class;?>">
-                                <a role="button"  data-toggle="collapse" data-target="#collapse<?=$students_class;?>" aria-expanded="false" aria-controls="collapse<?=$students_class;?>">
+                            <div class="accordion" style="width:99%;" id="corpo-discente<?=$students_class;?>">
+
                                 <div class="card">
                                     <div class="card-header" id="heading<?=$students_class;?>">
                                         <h6>
-                                            <span class="icon-plus"></span>
-
-                                                EGRESSOS DA TURMA DE <?=getStudentsClass($students_class);?>
-
+                                            <a role="button" data-toggle="collapse" data-target="#collapse<?=$students_class;?>" aria-expanded="<?=($i === 0 ? 'true' : 'false');?>" aria-controls="collapse<?=$students_class;?>">
+                                                <i class="icon icon-plus"></i>EGRESSOS DA TURMA DE <?=getStudentsClass($students_class);?>
+                                            </a>
                                         </h6>
                                     </div>
-                                </a>
-                                    <div id="collapse<?=$students_class;?>" class="collapse" aria-labelledby="heading<?=$students_class;?>" data-parent="#corpo-discente<?=$students_class;?>">
+
+                                    <div id="collapse<?=$students_class;?>" class="collapse<?=($i === 0 ? ' show' : '');?>" aria-labelledby="heading<?=$students_class;?>" data-parent="#corpo-discente<?=$students_class;?>">
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table table-striped">
@@ -64,7 +83,10 @@
                                                                 <td><?=$students_name;?></td>
                                                                 <td><?=getStudentsClass($students_class);?></td>
                                                             </tr>
-                                                        <?php endforeach; endif; ?>
+                                                        <?php
+                                                        $i++;
+                                                        endforeach;
+                                                        endif; ?>
 
                                                     </tbody>
                                                 </table>
@@ -74,7 +96,21 @@
                                 </div>
                             </div>
                             <div class="clear"></div>
+
                         <?php endforeach; endif; ?>
+                </div>
+                <div class="row py-4">
+                    <?php
+                    $Read->ExeRead(DB_PAGE_COMPLEMENTS, "WHERE complement_name = :name AND complement_status= :status", "name=egressos&status=1");
+                    if ($Read->getResult()):
+                        foreach ($Read->getResult() as $complemento) {
+                            extract($complemento);
+                            echo $complement_text;
+                        }
+
+
+                    endif;
+                    ?>
                 </div>
             </div>
             <?php require REQUIRE_PATH . '/inc/sidebar_pag.php'; ?>
@@ -85,6 +121,3 @@
     </div>
 </section>
 
-
-
-</section>

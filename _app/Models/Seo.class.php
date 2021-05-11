@@ -376,9 +376,9 @@ class Seo {
             $this->Title =  "Processo Seletivo - " . SITE_NAME;
             $this->Description = "Nossos docentes possui qualificação e experiência comprovada para te ensinar as melhores e atuais tecnologias do mercado.";
             $this->Image =  INCLUDE_PATH . '/images/default.jpg';
-        elseif($this->File == 'processo-seletivo-anteriores'):
+        elseif($this->File == 'processos-seletivos-anteriores'):
             $this->Schema = 'WebSite';
-            $this->Title =  "Processos Seletivos Anteriores - " . SITE_NAME;
+            $this->Title =  "Processos Seletivos Encerrados - " . SITE_NAME;
             $this->Description = "Nossos docentes possui qualificação e experiência comprovada para te ensinar as melhores e atuais tecnologias do mercado.";
             $this->Image =  INCLUDE_PATH . '/images/default.jpg';
         elseif($this->File == 'inscricao'):
@@ -400,6 +400,16 @@ class Seo {
             $this->Schema = 'WebSite';
             $this->Title =  "Fale Conosco - " . SITE_NAME;
             $this->Description = "Nossos docentes possui qualificação e experiência comprovada para te ensinar as melhores e atuais tecnologias do mercado.";
+            $this->Image =  INCLUDE_PATH . '/images/default.jpg';
+        elseif($this->File == 'projetos-de-pesquisa'):
+            $this->Schema = 'WebSite';
+            $this->Title =  "Projetos de Pesquisa - " . SITE_NAME;
+            $this->Description = "Veja os projetos de pesquisas desenvolvidos no PROFICAM.";
+            $this->Image =  INCLUDE_PATH . '/images/default.jpg';
+        elseif($this->File == 'rede-de-relacionamentos'):
+            $this->Schema = 'WebSite';
+            $this->Title =  "Rede de Relacionamentos - " . SITE_NAME;
+            $this->Description = "Nossa rede de relacionamentos no PROFICAM.";
             $this->Image =  INCLUDE_PATH . '/images/default.jpg';
 
 

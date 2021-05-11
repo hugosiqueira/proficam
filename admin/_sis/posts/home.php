@@ -47,7 +47,7 @@ endif;
             <span class="crumb">/</span>
             <a title="<?= ADMIN_NAME; ?>" href="dashboard.php?wc=home">Dashboard</a>
             <span class="crumb">/</span>
-            <a title="Todos os Posts" href="dashboard.php?wc=posts/home">Posts</a>
+            <a title="Todos os Posts" href="dashboard.php?wc=posts/home">Notícias</a>
             <?= ($S ? "<span class='crumb'>/</span> <span class='icon-search'>{$S}</span>" : ''); ?>
         </p>
     </div>

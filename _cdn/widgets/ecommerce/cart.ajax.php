@@ -362,13 +362,13 @@ switch ($Action):
         endif;
         break;
 
-    //WORK CONTROL ADDR SELECT
+    // ADDR SELECT
     case 'wc_addr_select':
         $_SESSION['wc_order_addr'] = $POST['addr_id'];
         $jSON['addr'] = $POST['addr_id'];
         break;
 
-    //WORK CONTROL ORDER CREATE
+    // ORDER CREATE
     case 'wc_order_create':
         //ERROR KEY
         $CartError = null;

@@ -80,6 +80,9 @@ define ('DB_INTERVIEW_TYPE', 'itv_interview_type');
 define ('DB_SELECTION_PROCESS', 'itv_selection_process');
 define ('DB_SELECTION_PROCESS_SCHEDULE', 'itv_selection_process_schedule');
 define ('DB_SELECTION_PROCESS_FILES', 'itv_selection_process_files');
+define ('DB_PROJECTS', 'itv_projects');
+define ('DB_SITE_SERVICES', 'itv_site_services');
+define ('DB_PAGE_COMPLEMENTS', 'itv_page_complements');
 
 
 
@@ -432,16 +435,18 @@ function getWcHotmartStatusClass($Status = null)
     endif;
 }
 
-function limita_caracteres($texto, $limite, $quebra = true){
+function limita_caracteres($texto, $limite,$sep = '...', $quebra = true){
     $tamanho = strlen($texto);
     if($tamanho <= $limite){ //Verifica se o tamanho do texto é menor ou igual ao limite
         $novo_texto = $texto;
     }else{ // Se o tamanho do texto for maior que o limite
         if($quebra == true){ // Verifica a opção de quebrar o texto
-            $novo_texto = trim(substr($texto, 0, $limite))."...";
+
+            $novo_texto = trim(substr($texto, 0, $limite)).$sep;
+
         }else{ // Se não, corta $texto na última palavra antes do limite
             $ultimo_espaco = strrpos(substr($texto, 0, $limite), " "); // Localiza o útlimo espaço antes de $limite
-            $novo_texto = trim(substr($texto, 0, $ultimo_espaco))."..."; // Corta o $texto até a posição localizada
+            $novo_texto = trim(substr($texto, 0, $ultimo_espaco)).$sep; // Corta o $texto até a posição localizada
         }
     }
     return $novo_texto; // Retorna o valor formatado

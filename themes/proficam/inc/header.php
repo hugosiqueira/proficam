@@ -1,15 +1,12 @@
 <div class="bg-top navbar-light header-mobile">
     <div class="container">
         <div class="row ">
-            <div class="d-flex align-items-center align-items-center pl-2">
+            <div class="d-flex align-items-center pl-2">
                 <div class="py-3 pr-2 d-flex topper justify-content-center  align-items-center">
-
                     <div class="d-flex justify-content-start align-items-center pr-2"><a title="Escola de Minas" target="_blank" href="https://em.ufop.br"><img alt='Escola de Minas' class="mx-auto" src="<?= BASE . '/tim.php?src=_cdn/images/logo_escola_minas.png&w=90&h=90';?>" width="90px" height="90px"/></a></div>
                     <div class="d-flex justify-content-end align-items-center"><a title="ITV" target="_blank" href="https://itv.org"><img alt='ITV'  class="mx-auto"  src="<?= BASE . '/tim.php?src=_cdn/images/itv.png&w=193&h=60';?>" width="193px" height="60px" /></a></div>
-
                 </div>
             </div>
-
             <div class="d-flex justify-content-center align-items-center" >
                 <a class="navbar-brand" href="<?= BASE;?>">
                     <img alt='Proficam'  class="logo_desktop"  src="<?= BASE . '/tim.php?src=_cdn/images/logo_proficam.jpg&w=683&h=99';?>"  />
@@ -33,13 +30,6 @@
                 data-target="#ftco-nav" data-toggle="collapse" type="button">
             <span class="oi oi-menu"></span> Menu
         </button>
-        <!--form action="#" class="searchform order-lg-last">
-            <div class="form-group d-flex">
-                <input class="form-control pl-3" placeholder="Pesquisar" type="text">
-                <button class="form-control search" placeholder="" type="submit"><span class="ion-ios-search"></span>
-                </button>
-            </div>
-        </form-->
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
@@ -50,9 +40,10 @@
                         <a class="dropdown-item" href="<?= BASE;?>/historico">Histórico</a>
                         <a class="dropdown-item" href="<?= BASE;?>/area-de-concentracao">Área de Concentração</a>
                         <a class="dropdown-item" href="<?= BASE;?>/linhas-de-pesquisa">Linhas de Pesquisa</a>
+                        <a class="dropdown-item" href="<?= BASE;?>/projetos-de-pesquisa">Projetos de Pesquisa</a>
                         <a class="dropdown-item" href="<?= BASE;?>/estrutura-curricular">Estrutura Curricular e Disciplinas</a>
-
                         <a class="dropdown-item" href="<?= BASE;?>/integracao-com-a-industria">Integração com a Indústria</a>
+                        <a class="dropdown-item" href="<?= BASE;?>/rede-de-relacionamentos">Rede de Relacionamentos</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -94,10 +85,8 @@
                        class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
                        id="menu-processo-seletivo" role="button">Processo Seletivo</a>
                     <div aria-labelledby="menu-processo-seletivo" class="dropdown-menu">
-                        <a class="dropdown-item" href="<?= BASE;?>/processo-seletivo">Atual</a>
-                        <a class="dropdown-item" href="<?= BASE;?>/processo-seletivo-anteriores">Anteriores</a>
-                        <!--div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?= BASE;?>/inscricao">Faça sua Inscrição</a-->
+                        <a class="dropdown-item" href="<?= BASE;?>/processo-seletivo">Em Andamento</a>
+                        <a class="dropdown-item" href="<?= BASE;?>/processos-seletivos-anteriores">Encerrados</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

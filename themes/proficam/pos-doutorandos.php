@@ -50,7 +50,19 @@
                             </tbody>
                         </table>
                     </div>
+                </div><div class="row py-4">
+                    <?php
+                    $Read->ExeRead(DB_PAGE_COMPLEMENTS, "WHERE complement_name = :name AND complement_status= :status", "name=pos-doutorandos&status=1");
+                    if ($Read->getResult()):
+                        foreach ($Read->getResult() as $complemento) {
+                            extract($complemento);
+                            echo $complement_text;
+                        }
+
+                    endif;
+                    ?>
                 </div>
+
             </div>
             <div class="clear"></div>
 

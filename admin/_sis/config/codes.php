@@ -13,7 +13,7 @@ endif;
 
 <header class="dashboard_header">
     <div class="dashboard_header_title">
-        <h1 class="icon-cog">Work Control Codes</h1>
+        <h1 class="icon-cog">Bee System Codes</h1>
         <p class="dashboard_header_breadcrumbs">
             &raquo; <?= ADMIN_NAME; ?>
             <span class="crumb">/</span>
@@ -35,7 +35,7 @@ endif;
             <input type="hidden" name="callback_action" value="workcodes"/>
             <input type="hidden" name="code_id" value=""/>
 
-            <p class="wc_codes_create_form_title">Novo Code Work Control:</p>
+            <p class="wc_codes_create_form_title">Novo Código:</p>
             <label>
                 <span>Título de Identificação: (ex: Google analitycs)</span>
                 <input type="text" name="code_name" placeholder="Título:" required/>
