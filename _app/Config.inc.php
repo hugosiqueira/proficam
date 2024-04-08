@@ -10,9 +10,9 @@ if ($_SERVER['HTTP_HOST'] == 'localhost'):
     define('SIS_DB_DBSA', 'workcontrol'); //Nome  do banco de dados no localhost
 else:
     define('SIS_DB_HOST', 'localhost'); //Link do banco de dados no servidor
-    define('SIS_DB_USER', 'agen_proficam'); //Usuário do banco de dados no servidor
-    define('SIS_DB_PASS', '8av1yOGafcIdzs5k'); //Senha  do banco de dados no servidor
-    define('SIS_DB_DBSA', 'agen_proficam'); //Nome  do banco de dados no servidor
+    define('SIS_DB_USER', ''); //Usuário do banco de dados no servidor
+    define('SIS_DB_PASS', ''); //Senha  do banco de dados no servidor
+    define('SIS_DB_DBSA', ''); //Nome  do banco de dados no servidor
 endif;
 /*
  * CACHE E CONFIG
